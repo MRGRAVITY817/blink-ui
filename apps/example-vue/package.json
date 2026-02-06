@@ -1,0 +1,22 @@
+{
+  "name": "example-vue",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "clean": "rm -rf .turbo node_modules dist"
+  },
+  "dependencies": {
+    "@blink-ui/components": "*",
+    "vue": "^3.4.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "typescript": "5.5.4",
+    "vite": "^5.1.4",
+    "vue-tsc": "^2.0.0"
+  }
+}

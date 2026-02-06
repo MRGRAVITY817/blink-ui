@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "target": "ES2021",
+    "lib": ["dom", "dom.iterable", "ES2021"],
+    "module": "ESNext",
+    "noEmit": true
+  }
+}

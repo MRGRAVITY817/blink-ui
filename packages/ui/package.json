@@ -1,34 +1,82 @@
 {
-  "name": "@acme/ui",
+  "name": "@blink-ui/components",
   "version": "0.0.0",
-  "sideEffects": false,
+  "type": "module",
+  "sideEffects": [
+    "./src/define.ts",
+    "./dist/define.js"
+  ],
   "license": "MIT",
   "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
     "./button": {
-      "types": "./src/button.tsx",
-      "import": "./dist/button.mjs",
-      "require": "./dist/button.js"
-    }
+      "types": "./dist/components/button/index.d.ts",
+      "import": "./dist/components/button/index.js"
+    },
+    "./card": {
+      "types": "./dist/components/card/index.d.ts",
+      "import": "./dist/components/card/index.js"
+    },
+    "./input": {
+      "types": "./dist/components/input/index.d.ts",
+      "import": "./dist/components/input/index.js"
+    },
+    "./badge": {
+      "types": "./dist/components/badge/index.d.ts",
+      "import": "./dist/components/badge/index.js"
+    },
+    "./alert": {
+      "types": "./dist/components/alert/index.d.ts",
+      "import": "./dist/components/alert/index.js"
+    },
+    "./define": {
+      "types": "./dist/define.d.ts",
+      "import": "./dist/define.js"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js"
+    },
+    "./custom-elements.json": "./custom-elements.json"
   },
+  "files": [
+    "dist",
+    "custom-elements.json"
+  ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && npm run build:cem",
+    "build:cem": "custom-elements-manifest analyze --litelement --outdir .",
     "dev": "tsup --watch",
     "lint": "eslint . --max-warnings 0",
-    "clean": "rm -rf .turbo node_modules dist"
+    "clean": "rm -rf .turbo node_modules dist custom-elements.json"
+  },
+  "dependencies": {
+    "lit": "^3.2.0"
   },
   "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.10.3",
+    "@lit/react": "^1.0.6",
     "@repo/eslint-config": "*",
-    "@types/react": "^18.2.61",
-    "@types/react-dom": "^18.2.19",
-    "eslint": "^8.57.0",
     "@repo/typescript-config": "*",
+    "@types/react": "^18.2.61",
+    "eslint": "^8.57.0",
+    "react": "^18.2.0",
     "tsup": "^8.0.2",
     "typescript": "5.5.4"
   },
-  "dependencies": {
-    "react": "^18.2.0"
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "customElements": "custom-elements.json"
 }
