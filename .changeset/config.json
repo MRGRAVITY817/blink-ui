@@ -7,7 +7,7 @@
   "access": "public",
   "updateInternalDependencies": "patch",
   "ignore": [
-    "@repo/docs",
+    "docs",
     "example-react",
     "example-vue",
     "example-svelte",
