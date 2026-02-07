@@ -1,0 +1,50 @@
+{
+  "version": "0.0.0",
+  "components": [
+    {
+      "name": "alert",
+      "description": "A dismissible alert component for the Blink UI design system.",
+      "tag": "bl-alert",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "badge",
+      "description": "A lightweight badge component for the Blink UI design system.",
+      "tag": "bl-badge",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "button",
+      "description": "A customisable button component for the Blink UI design system.",
+      "tag": "bl-button",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "card",
+      "description": "A card component for the Blink UI design system.",
+      "tag": "bl-card",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "input",
+      "description": "A text input component for the Blink UI design system.",
+      "tag": "bl-input",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    }
+  ]
+}
