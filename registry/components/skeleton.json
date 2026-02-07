@@ -7,16 +7,16 @@
   },
   "files": [
     {
-      "path": "skeleton/skeleton.ts",
-      "content": "import { LitElement, html } from 'lit';\nimport { customElement, property } from 'lit/decorators.js';\nimport { tokens } from '../../styles/tokens.js';\nimport { skeletonStyles } from './skeleton.styles.js';\n\nexport type SkeletonVariant = 'text' | 'circle' | 'rect';\n\n/**\n * A placeholder loading state with animated pulse.\n *\n * @element bl-skeleton\n * @csspart skeleton - The skeleton element.\n */\n@customElement('bl-skeleton')\nexport class BlSkeleton extends LitElement {\n  static override styles = [tokens, skeletonStyles];\n\n  /** Width of the skeleton. */\n  @property()\n  width = '';\n\n  /** Height of the skeleton. */\n  @property()\n  height = '';\n\n  /** Shape variant. */\n  @property({ reflect: true })\n  variant: SkeletonVariant = 'rect';\n\n  /** Shorthand for circle width and height. */\n  @property()\n  size = '';\n\n  protected override render() {\n    const w = this.variant === 'circle' && this.size ? this.size : this.width || '100%';\n    const h =\n      this.variant === 'circle' && this.size\n        ? this.size\n        : this.height || (this.variant === 'text' ? '1em' : '100%');\n\n    return html`\n      <div\n        part=\"skeleton\"\n        class=\"skeleton\"\n        style=\"width:${w};height:${h}\"\n        aria-hidden=\"true\"\n      ></div>\n    `;\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    'bl-skeleton': BlSkeleton;\n  }\n}\n"
+      "path": "skeleton/index.ts",
+      "content": "export { BlSkeleton } from './skeleton.js';\nexport type { SkeletonVariant } from './skeleton.js';\n"
     },
     {
       "path": "skeleton/skeleton.styles.ts",
       "content": "import { css } from 'lit';\n\nexport const skeletonStyles = css`\n  :host {\n    display: block;\n  }\n\n  .skeleton {\n    background-color: var(--bl-color-neutral-100);\n    border-radius: var(--bl-radius-md);\n    animation: bl-pulse 1.5s ease-in-out infinite;\n  }\n\n  :host([variant='circle']) .skeleton {\n    border-radius: var(--bl-radius-full);\n  }\n\n  :host([variant='text']) .skeleton {\n    border-radius: var(--bl-radius-sm);\n  }\n\n  @keyframes bl-pulse {\n    0%,\n    100% {\n      opacity: 1;\n    }\n    50% {\n      opacity: 0.4;\n    }\n  }\n`;\n"
     },
     {
-      "path": "skeleton/index.ts",
-      "content": "export { BlSkeleton } from './skeleton.js';\nexport type { SkeletonVariant } from './skeleton.js';\n"
+      "path": "skeleton/skeleton.ts",
+      "content": "import { LitElement, html } from 'lit';\nimport { customElement, property } from 'lit/decorators.js';\nimport { tokens } from '../../styles/tokens.js';\nimport { skeletonStyles } from './skeleton.styles.js';\n\nexport type SkeletonVariant = 'text' | 'circle' | 'rect';\n\n/**\n * A placeholder loading state with animated pulse.\n *\n * @element bl-skeleton\n * @csspart skeleton - The skeleton element.\n */\n@customElement('bl-skeleton')\nexport class BlSkeleton extends LitElement {\n  static override styles = [tokens, skeletonStyles];\n\n  /** Width of the skeleton. */\n  @property()\n  width = '';\n\n  /** Height of the skeleton. */\n  @property()\n  height = '';\n\n  /** Shape variant. */\n  @property({ reflect: true })\n  variant: SkeletonVariant = 'rect';\n\n  /** Shorthand for circle width and height. */\n  @property()\n  size = '';\n\n  protected override render() {\n    const w = this.variant === 'circle' && this.size ? this.size : this.width || '100%';\n    const h =\n      this.variant === 'circle' && this.size\n        ? this.size\n        : this.height || (this.variant === 'text' ? '1em' : '100%');\n\n    return html`\n      <div\n        part=\"skeleton\"\n        class=\"skeleton\"\n        style=\"width:${w};height:${h}\"\n        aria-hidden=\"true\"\n      ></div>\n    `;\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    'bl-skeleton': BlSkeleton;\n  }\n}\n"
     }
   ]
 }

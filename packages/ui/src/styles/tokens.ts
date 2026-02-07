@@ -129,6 +129,12 @@ export const tokens = css`
     --bl-shadow-xs: 0px 1px 2px rgba(10, 13, 18, 0.05);
     --bl-shadow-sm: 0px 1px 3px rgba(10, 13, 18, 0.1),
       0px 1px 2px -1px rgba(10, 13, 18, 0.1);
+    --bl-shadow-md: 0px 4px 6px -1px rgba(10, 13, 18, 0.1),
+      0px 2px 4px -2px rgba(10, 13, 18, 0.1);
+    --bl-shadow-lg: 0px 10px 15px -3px rgba(10, 13, 18, 0.1),
+      0px 4px 6px -4px rgba(10, 13, 18, 0.1);
+    --bl-shadow-xl: 0px 20px 25px -5px rgba(10, 13, 18, 0.1),
+      0px 8px 10px -6px rgba(10, 13, 18, 0.1);
 
     /* -------------------------------------------------------
        Focus Ring
@@ -144,5 +150,28 @@ export const tokens = css`
     --bl-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
     --bl-transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
     --bl-transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* -------------------------------------------------------
+       Z-index scale
+       ------------------------------------------------------- */
+    --bl-z-dropdown: 1000;
+    --bl-z-sticky: 1010;
+    --bl-z-overlay: 1020;
+    --bl-z-modal: 1030;
+    --bl-z-toast: 1040;
+
+    /* -------------------------------------------------------
+       Overlay
+       ------------------------------------------------------- */
+    --bl-overlay-bg: rgba(0, 0, 0, 0.5);
+    --bl-overlay-backdrop-blur: 0px;
+
+    /* -------------------------------------------------------
+       Animation
+       ------------------------------------------------------- */
+    --bl-animation-duration-fast: 150ms;
+    --bl-animation-duration-normal: 200ms;
+    --bl-animation-easing-enter: cubic-bezier(0.0, 0.0, 0.2, 1);
+    --bl-animation-easing-exit: cubic-bezier(0.4, 0.0, 1, 1);
   }
 `;

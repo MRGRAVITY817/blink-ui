@@ -1,0 +1,25 @@
+{
+  "name": "context-menu",
+  "tag": "bl-context-menu",
+  "registryDependencies": [
+    "menu"
+  ],
+  "npmDependencies": {
+    "lit": "^3.2.0",
+    "@floating-ui/dom": "^1.7.0"
+  },
+  "files": [
+    {
+      "path": "context-menu/context-menu.styles.ts",
+      "content": "import { css } from 'lit';\n\nexport const contextMenuStyles = css`\n  :host {\n    display: contents;\n  }\n`;\n"
+    },
+    {
+      "path": "context-menu/context-menu.ts",
+      "content": "import { LitElement, html } from 'lit';\nimport { customElement, property } from 'lit/decorators.js';\nimport { tokens } from '../../styles/tokens.js';\nimport { contextMenuStyles } from './context-menu.styles.js';\nimport type { BlMenu } from '../menu/menu.js';\n\n/**\n * A context menu that opens on right-click of its slotted target.\n * Reuses `bl-menu` and all `bl-menu-*` sub-elements.\n *\n * @element bl-context-menu\n * @slot target - The element that triggers the context menu on right-click.\n * @slot - `bl-menu-item`, `bl-menu-separator`, `bl-menu-group` elements.\n * @fires bl-menu-select - Emitted when a menu item is selected.\n */\n@customElement('bl-context-menu')\nexport class BlContextMenu extends LitElement {\n  static override styles = [tokens, contextMenuStyles];\n\n  /** Whether the menu is currently open. */\n  @property({ type: Boolean, reflect: true })\n  open = false;\n\n  override connectedCallback(): void {\n    super.connectedCallback();\n    this.addEventListener('contextmenu', this._handleContextMenu);\n    this.addEventListener('keydown', this._handleKeyDown);\n  }\n\n  override disconnectedCallback(): void {\n    super.disconnectedCallback();\n    this.removeEventListener('contextmenu', this._handleContextMenu);\n    this.removeEventListener('keydown', this._handleKeyDown);\n  }\n\n  private _handleContextMenu = (e: MouseEvent): void => {\n    e.preventDefault();\n    const menu = this.querySelector<BlMenu>('bl-menu');\n    if (!menu) return;\n\n    // Position at cursor using Floating UI virtual element\n    menu._virtualReference = {\n      getBoundingClientRect: () => ({\n        x: e.clientX,\n        y: e.clientY,\n        top: e.clientY,\n        left: e.clientX,\n        bottom: e.clientY,\n        right: e.clientX,\n        width: 0,\n        height: 0,\n      }),\n    };\n    menu.placement = 'bottom-start';\n    menu.open = true;\n    this.open = true;\n\n    const onClose = () => {\n      this.open = false;\n      menu.removeEventListener('bl-popover-hide', onClose);\n    };\n    // Listen for menu close\n    const observer = new MutationObserver(() => {\n      if (!menu.open) {\n        this.open = false;\n        observer.disconnect();\n      }\n    });\n    observer.observe(menu, { attributes: true, attributeFilter: ['open'] });\n  };\n\n  private _handleKeyDown = (e: KeyboardEvent): void => {\n    // Shift+F10 opens context menu at target position\n    if (e.key === 'F10' && e.shiftKey) {\n      e.preventDefault();\n      const target = this.querySelector<HTMLElement>('[slot=\"target\"]') ?? this;\n      const rect = target.getBoundingClientRect();\n      // Simulate a context menu event at the center of the target\n      const syntheticEvent = new MouseEvent('contextmenu', {\n        clientX: rect.left + rect.width / 2,\n        clientY: rect.top + rect.height / 2,\n        bubbles: true,\n        cancelable: true,\n      });\n      this.dispatchEvent(syntheticEvent);\n    }\n  };\n\n  protected override render() {\n    return html`\n      <slot name=\"target\"></slot>\n      <slot></slot>\n    `;\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    'bl-context-menu': BlContextMenu;\n  }\n}\n"
+    },
+    {
+      "path": "context-menu/index.ts",
+      "content": "export { BlContextMenu } from './context-menu.js';\n"
+    }
+  ]
+}

@@ -7,12 +7,12 @@
   },
   "files": [
     {
-      "path": "icon/icon.ts",
-      "content": "import { LitElement, html, nothing } from 'lit';\nimport { customElement, property } from 'lit/decorators.js';\nimport { iconStyles } from './icon.styles.js';\n\n/**\n * SVG icon wrapper. Decorative by default (`aria-hidden=\"true\"`),\n * or labelled with `aria-label` when the `label` prop is set.\n *\n * @element bl-icon\n * @slot - SVG element to display.\n */\n@customElement('bl-icon')\nexport class BlIcon extends LitElement {\n  static override styles = [iconStyles];\n\n  /** Accessible label. If set, the icon gets `role=\"img\"` and `aria-label`. */\n  @property()\n  label = '';\n\n  protected override render() {\n    const isLabelled = !!this.label;\n    return html`\n      <span\n        part=\"icon\"\n        role=${isLabelled ? 'img' : nothing}\n        aria-label=${isLabelled ? this.label : nothing}\n        aria-hidden=${isLabelled ? nothing : 'true'}\n      >\n        <slot></slot>\n      </span>\n    `;\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    'bl-icon': BlIcon;\n  }\n}\n"
-    },
-    {
       "path": "icon/icon.styles.ts",
       "content": "import { css } from 'lit';\n\nexport const iconStyles = css`\n  :host {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    width: 1em;\n    height: 1em;\n    line-height: 1;\n    vertical-align: middle;\n  }\n\n  ::slotted(svg) {\n    width: 100%;\n    height: 100%;\n    fill: currentColor;\n  }\n`;\n"
+    },
+    {
+      "path": "icon/icon.ts",
+      "content": "import { LitElement, html, nothing } from 'lit';\nimport { customElement, property } from 'lit/decorators.js';\nimport { iconStyles } from './icon.styles.js';\n\n/**\n * SVG icon wrapper. Decorative by default (`aria-hidden=\"true\"`),\n * or labelled with `aria-label` when the `label` prop is set.\n *\n * @element bl-icon\n * @slot - SVG element to display.\n */\n@customElement('bl-icon')\nexport class BlIcon extends LitElement {\n  static override styles = [iconStyles];\n\n  /** Accessible label. If set, the icon gets `role=\"img\"` and `aria-label`. */\n  @property()\n  label = '';\n\n  protected override render() {\n    const isLabelled = !!this.label;\n    return html`\n      <span\n        part=\"icon\"\n        role=${isLabelled ? 'img' : nothing}\n        aria-label=${isLabelled ? this.label : nothing}\n        aria-hidden=${isLabelled ? nothing : 'true'}\n      >\n        <slot></slot>\n      </span>\n    `;\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    'bl-icon': BlIcon;\n  }\n}\n"
     },
     {
       "path": "icon/index.ts",

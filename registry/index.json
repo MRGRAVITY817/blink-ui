@@ -2,6 +2,15 @@
   "version": "0.0.0",
   "components": [
     {
+      "name": "accordion",
+      "description": "A container for accordion items. Manages which items are open.",
+      "tag": "bl-accordion",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
       "name": "alert",
       "description": "A dismissible alert component for the Blink UI design system.",
       "tag": "bl-alert",
@@ -58,6 +67,27 @@
       }
     },
     {
+      "name": "context-menu",
+      "description": "A context menu that opens on right-click of its slotted target.",
+      "tag": "bl-context-menu",
+      "registryDependencies": [
+        "menu"
+      ],
+      "npmDependencies": {
+        "lit": "^3.2.0",
+        "@floating-ui/dom": "^1.7.0"
+      }
+    },
+    {
+      "name": "dialog",
+      "description": "A modal dialog with backdrop, focus trap, and close controls.",
+      "tag": "bl-dialog",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
       "name": "icon",
       "description": "SVG icon wrapper. Decorative by default (`aria-hidden=\"true\"`),",
       "tag": "bl-icon",
@@ -85,6 +115,26 @@
       }
     },
     {
+      "name": "menu",
+      "description": "A dropdown menu with trigger support.",
+      "tag": "bl-menu",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0",
+        "@floating-ui/dom": "^1.7.0"
+      }
+    },
+    {
+      "name": "popover",
+      "description": "A popover that anchors to a trigger element.",
+      "tag": "bl-popover",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0",
+        "@floating-ui/dom": "^1.7.0"
+      }
+    },
+    {
       "name": "radio",
       "description": "An individual radio button. Must be inside `bl-radio-group`.",
       "tag": "bl-radio",
@@ -104,6 +154,16 @@
       ],
       "npmDependencies": {
         "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "select",
+      "description": "A select dropdown with virtual focus (aria-activedescendant).",
+      "tag": "bl-select",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0",
+        "@floating-ui/dom": "^1.7.0"
       }
     },
     {
@@ -145,12 +205,53 @@
       }
     },
     {
+      "name": "tabs",
+      "description": "A tabbed interface container managing `bl-tab` and `bl-tab-panel` children.",
+      "tag": "bl-tabs",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "toast",
+      "description": "A single toast notification. Normally created by the `toast()` API.",
+      "tag": "bl-toast",
+      "registryDependencies": [
+        "live-announce"
+      ],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
       "name": "toggle",
       "description": "A pressable toggle button with `aria-pressed`.",
       "tag": "bl-toggle",
       "registryDependencies": [],
       "npmDependencies": {
         "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "toggle-group",
+      "description": "Groups `bl-toggle` children into a single/multiple selection set.",
+      "tag": "bl-toggle-group",
+      "registryDependencies": [
+        "toggle"
+      ],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "tooltip",
+      "description": "A tooltip that displays on hover/focus of its slotted trigger.",
+      "tag": "bl-tooltip",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0",
+        "@floating-ui/dom": "^1.7.0"
       }
     },
     {

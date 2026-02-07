@@ -76,6 +76,46 @@
       "types": "./dist/components/radio-group/index.d.ts",
       "import": "./dist/components/radio-group/index.js"
     },
+    "./tooltip": {
+      "types": "./dist/components/tooltip/index.d.ts",
+      "import": "./dist/components/tooltip/index.js"
+    },
+    "./popover": {
+      "types": "./dist/components/popover/index.d.ts",
+      "import": "./dist/components/popover/index.js"
+    },
+    "./accordion": {
+      "types": "./dist/components/accordion/index.d.ts",
+      "import": "./dist/components/accordion/index.js"
+    },
+    "./toggle-group": {
+      "types": "./dist/components/toggle-group/index.d.ts",
+      "import": "./dist/components/toggle-group/index.js"
+    },
+    "./tabs": {
+      "types": "./dist/components/tabs/index.d.ts",
+      "import": "./dist/components/tabs/index.js"
+    },
+    "./select": {
+      "types": "./dist/components/select/index.d.ts",
+      "import": "./dist/components/select/index.js"
+    },
+    "./menu": {
+      "types": "./dist/components/menu/index.d.ts",
+      "import": "./dist/components/menu/index.js"
+    },
+    "./context-menu": {
+      "types": "./dist/components/context-menu/index.d.ts",
+      "import": "./dist/components/context-menu/index.js"
+    },
+    "./dialog": {
+      "types": "./dist/components/dialog/index.d.ts",
+      "import": "./dist/components/dialog/index.js"
+    },
+    "./toast": {
+      "types": "./dist/components/toast/index.d.ts",
+      "import": "./dist/components/toast/index.js"
+    },
     "./visually-hidden": {
       "types": "./dist/primitives/visually-hidden/index.d.ts",
       "import": "./dist/primitives/visually-hidden/index.js"
@@ -114,6 +154,7 @@
     "clean": "rm -rf .turbo node_modules dist custom-elements.json"
   },
   "dependencies": {
+    "@floating-ui/dom": "^1.7.5",
     "lit": "^3.2.0"
   },
   "devDependencies": {

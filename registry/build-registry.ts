@@ -86,6 +86,24 @@ const REGISTRY_DEPS: Record<string, string[]> = {
   radio: ['label'],
   'radio-group': ['radio'],
   spinner: ['visually-hidden'],
+  'toggle-group': ['toggle'],
+  tabs: [],
+  select: [],
+  menu: [],
+  'context-menu': ['menu'],
+  tooltip: [],
+  popover: [],
+  accordion: [],
+  dialog: [],
+  toast: ['live-announce'],
+};
+
+const NPM_DEPS: Record<string, Record<string, string>> = {
+  tooltip: { lit: '^3.2.0', '@floating-ui/dom': '^1.7.0' },
+  popover: { lit: '^3.2.0', '@floating-ui/dom': '^1.7.0' },
+  select: { lit: '^3.2.0', '@floating-ui/dom': '^1.7.0' },
+  menu: { lit: '^3.2.0', '@floating-ui/dom': '^1.7.0' },
+  'context-menu': { lit: '^3.2.0', '@floating-ui/dom': '^1.7.0' },
 };
 
 function buildRegistry() {
@@ -115,6 +133,18 @@ function buildRegistry() {
     switch: 'An on/off toggle switch component.',
     radio: 'An individual radio button for use inside radio-group.',
     'radio-group': 'A radio group with arrow key navigation and single selection.',
+    // v0.4 Interaction Primitives
+    tooltip: 'A tooltip that displays on hover/focus of a trigger element.',
+    popover: 'A popover anchored to a trigger with configurable placement.',
+    accordion: 'An accordion with expandable/collapsible items.',
+    'toggle-group': 'Groups toggle buttons into single or multiple selection.',
+    tabs: 'A tabbed interface with keyboard navigation.',
+    select: 'A select dropdown with virtual focus and type-to-search.',
+    menu: 'A dropdown menu with keyboard navigation.',
+    'context-menu': 'A context menu triggered by right-click.',
+    dialog: 'A modal dialog with focus trap and backdrop.',
+    toast: 'Toast notifications with imperative API and auto-dismiss.',
+    // Primitives
     'visually-hidden': 'Visually hidden but accessible to screen readers.',
     portal: 'Renders children outside the parent DOM hierarchy.',
     'live-announce': 'Programmatic screen reader announcements via aria-live.',
@@ -129,18 +159,18 @@ function buildRegistry() {
   for (const name of componentDirs) {
     const dir = join(COMPONENTS_DIR, name);
     const files: RegistryFile[] = [];
-    const expectedFiles = [
-      `${name}.ts`,
-      `${name}.styles.ts`,
-      'index.ts',
-    ];
 
-    for (const fileName of expectedFiles) {
+    // Collect all .ts files in the component directory (supports compound components)
+    const allTsFiles = readdirSync(dir).filter((f) => f.endsWith('.ts')).sort();
+
+    // Must have at least an index.ts
+    if (!allTsFiles.includes('index.ts')) {
+      console.warn(`Skipping ${name}: missing index.ts`);
+      continue;
+    }
+
+    for (const fileName of allTsFiles) {
       const filePath = join(dir, fileName);
-      if (!existsSync(filePath)) {
-        console.warn(`Skipping ${name}: missing ${fileName}`);
-        continue;
-      }
       let content = readFileSync(filePath, 'utf-8');
       content = rewriteTokenImport(content);
       content = rewriteControllerImport(content);
@@ -150,18 +180,20 @@ function buildRegistry() {
       });
     }
 
-    if (files.length !== expectedFiles.length) continue;
+    if (files.length === 0) continue;
 
     const compMeta = meta.get(name);
     const tag = compMeta?.tag ?? `bl-${name}`;
     const description =
       compMeta?.description ?? fallbackDescriptions[name] ?? '';
 
+    const npmDeps = NPM_DEPS[name] ?? { lit: '^3.2.0' };
+
     const entry: ComponentEntry = {
       name,
       tag,
       registryDependencies: REGISTRY_DEPS[name] ?? [],
-      npmDependencies: { lit: '^3.2.0' },
+      npmDependencies: npmDeps,
       files,
     };
 
@@ -175,7 +207,7 @@ function buildRegistry() {
       description,
       tag,
       registryDependencies: REGISTRY_DEPS[name] ?? [],
-      npmDependencies: { lit: '^3.2.0' },
+      npmDependencies: npmDeps,
     });
   }
 

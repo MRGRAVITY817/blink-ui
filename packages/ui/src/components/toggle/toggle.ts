@@ -18,6 +18,10 @@ export type ToggleSize = 'sm' | 'md' | 'lg';
 export class BlToggle extends LitElement {
   static override styles = [tokens, toggleStyles];
 
+  /** A unique value for this toggle, used by toggle-group. */
+  @property()
+  value = '';
+
   /** Whether the toggle is pressed. */
   @property({ type: Boolean, reflect: true })
   pressed = false;

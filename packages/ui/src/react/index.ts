@@ -20,6 +20,28 @@ import { BlRadioGroup } from '../components/radio-group/radio-group.js';
 import { BlVisuallyHidden } from '../primitives/visually-hidden/visually-hidden.js';
 import { BlPortal } from '../primitives/portal/portal.js';
 
+// v0.4 Interaction Primitives
+import { BlTooltip } from '../components/tooltip/tooltip.js';
+import { BlPopover } from '../components/popover/popover.js';
+import { BlAccordion } from '../components/accordion/accordion.js';
+import { BlAccordionItem } from '../components/accordion/accordion-item.js';
+import { BlToggleGroup } from '../components/toggle-group/toggle-group.js';
+import { BlTabs } from '../components/tabs/tabs.js';
+import { BlTab } from '../components/tabs/tab.js';
+import { BlTabPanel } from '../components/tabs/tab-panel.js';
+import { BlSelect } from '../components/select/select.js';
+import { BlOption } from '../components/select/option.js';
+import { BlOptionGroup } from '../components/select/option-group.js';
+import { BlMenu } from '../components/menu/menu.js';
+import { BlMenuItem } from '../components/menu/menu-item.js';
+import { BlMenuSeparator } from '../components/menu/menu-separator.js';
+import { BlMenuGroup } from '../components/menu/menu-group.js';
+import { BlMenuGroupLabel } from '../components/menu/menu-group-label.js';
+import { BlContextMenu } from '../components/context-menu/context-menu.js';
+import { BlDialog } from '../components/dialog/dialog.js';
+import { BlToast } from '../components/toast/toast.js';
+import { BlToastRegion } from '../components/toast/toast-region.js';
+
 export const Button = createComponent({
   tagName: 'bl-button',
   elementClass: BlButton,
@@ -146,5 +168,161 @@ export const Portal = createComponent({
   elementClass: BlPortal,
   react: React,
 });
+
+// v0.4 Interaction Primitives
+
+export const Tooltip = createComponent({
+  tagName: 'bl-tooltip',
+  elementClass: BlTooltip,
+  react: React,
+  events: {
+    onBlTooltipShow: 'bl-tooltip-show' as EventName<CustomEvent>,
+    onBlTooltipHide: 'bl-tooltip-hide' as EventName<CustomEvent>,
+  },
+});
+
+export const Popover = createComponent({
+  tagName: 'bl-popover',
+  elementClass: BlPopover,
+  react: React,
+  events: {
+    onBlPopoverShow: 'bl-popover-show' as EventName<CustomEvent>,
+    onBlPopoverHide: 'bl-popover-hide' as EventName<CustomEvent>,
+  },
+});
+
+export const Accordion = createComponent({
+  tagName: 'bl-accordion',
+  elementClass: BlAccordion,
+  react: React,
+  events: {
+    onBlChange: 'bl-change' as EventName<CustomEvent<{ value: string | string[] }>>,
+  },
+});
+
+export const AccordionItem = createComponent({
+  tagName: 'bl-accordion-item',
+  elementClass: BlAccordionItem,
+  react: React,
+});
+
+export const ToggleGroup = createComponent({
+  tagName: 'bl-toggle-group',
+  elementClass: BlToggleGroup,
+  react: React,
+  events: {
+    onBlChange: 'bl-change' as EventName<CustomEvent<{ value: string }>>,
+  },
+});
+
+export const Tabs = createComponent({
+  tagName: 'bl-tabs',
+  elementClass: BlTabs,
+  react: React,
+  events: {
+    onBlChange: 'bl-change' as EventName<CustomEvent<{ value: string }>>,
+  },
+});
+
+export const Tab = createComponent({
+  tagName: 'bl-tab',
+  elementClass: BlTab,
+  react: React,
+});
+
+export const TabPanel = createComponent({
+  tagName: 'bl-tab-panel',
+  elementClass: BlTabPanel,
+  react: React,
+});
+
+export const Select = createComponent({
+  tagName: 'bl-select',
+  elementClass: BlSelect,
+  react: React,
+  events: {
+    onBlChange: 'bl-change' as EventName<CustomEvent<{ value: string }>>,
+  },
+});
+
+export const Option = createComponent({
+  tagName: 'bl-option',
+  elementClass: BlOption,
+  react: React,
+});
+
+export const OptionGroup = createComponent({
+  tagName: 'bl-option-group',
+  elementClass: BlOptionGroup,
+  react: React,
+});
+
+export const Menu = createComponent({
+  tagName: 'bl-menu',
+  elementClass: BlMenu,
+  react: React,
+  events: {
+    onBlMenuSelect: 'bl-menu-select' as EventName<CustomEvent<{ value: string }>>,
+  },
+});
+
+export const MenuItem = createComponent({
+  tagName: 'bl-menu-item',
+  elementClass: BlMenuItem,
+  react: React,
+});
+
+export const MenuSeparator = createComponent({
+  tagName: 'bl-menu-separator',
+  elementClass: BlMenuSeparator,
+  react: React,
+});
+
+export const MenuGroup = createComponent({
+  tagName: 'bl-menu-group',
+  elementClass: BlMenuGroup,
+  react: React,
+});
+
+export const MenuGroupLabel = createComponent({
+  tagName: 'bl-menu-group-label',
+  elementClass: BlMenuGroupLabel,
+  react: React,
+});
+
+export const ContextMenu = createComponent({
+  tagName: 'bl-context-menu',
+  elementClass: BlContextMenu,
+  react: React,
+});
+
+export const Dialog = createComponent({
+  tagName: 'bl-dialog',
+  elementClass: BlDialog,
+  react: React,
+  events: {
+    onBlDialogShow: 'bl-dialog-show' as EventName<CustomEvent>,
+    onBlDialogHide: 'bl-dialog-hide' as EventName<CustomEvent>,
+    onBlDialogRequestClose: 'bl-dialog-request-close' as EventName<CustomEvent>,
+  },
+});
+
+export const Toast = createComponent({
+  tagName: 'bl-toast',
+  elementClass: BlToast,
+  react: React,
+  events: {
+    onBlToastDismiss: 'bl-toast-dismiss' as EventName<CustomEvent>,
+  },
+});
+
+export const ToastRegion = createComponent({
+  tagName: 'bl-toast-region',
+  elementClass: BlToastRegion,
+  react: React,
+});
+
+// Re-export imperative toast() API
+export { toast } from '../components/toast/toast-region.js';
 
 type EventName<T> = string & { __event_type?: T };
