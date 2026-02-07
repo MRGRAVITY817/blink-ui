@@ -20,8 +20,10 @@ A web component design system built with [Lit](https://lit.dev/), packaged for u
 | Path | Description |
 |---|---|
 | `packages/ui` | Core component library (`@blink-ui/components`) — Lit web components |
+| `packages/cli` | CLI tool (`@blink-ui/cli`) — Download component source into your project |
 | `packages/typescript-config` | Shared `tsconfig.json` presets |
 | `packages/eslint-config` | Shared ESLint configurations |
+| `registry/` | Static JSON registry of component source code, served via GitHub raw URLs |
 | `apps/docs` | Storybook documentation site |
 | `apps/example-react` | Vite + React example using `@lit/react` wrappers |
 | `apps/example-vue` | Vite + Vue 3 example using native custom elements |
@@ -81,13 +83,15 @@ bun run dev --filter=example-solid
 
 ## Usage
 
-### Install the package
+There are two ways to use Blink UI components: **install as a package** or **copy the source code** into your project via the CLI.
+
+### Option A: Install as a Package
 
 ```sh
 npm install @blink-ui/components
 ```
 
-### In a non-React framework (Vue, Svelte, Solid, vanilla JS)
+#### In a non-React framework (Vue, Svelte, Solid, vanilla JS)
 
 Import the side-effect registration file, then use the elements directly in HTML:
 
@@ -106,7 +110,7 @@ import '@blink-ui/components/define';
 <bl-alert variant="info" closable>Heads up!</bl-alert>
 ```
 
-### In React
+#### In React
 
 Use the `@lit/react` wrappers for proper property and event handling:
 
@@ -131,7 +135,7 @@ function App() {
 }
 ```
 
-### Individual component imports
+#### Individual component imports
 
 Import only what you need for tree-shaking:
 
@@ -139,6 +143,70 @@ Import only what you need for tree-shaking:
 import { BlButton } from '@blink-ui/components/button';
 import { BlCard } from '@blink-ui/components/card';
 ```
+
+### Option B: Copy Source with the CLI
+
+The CLI downloads component source code directly into your project, giving you full ownership and customizability (similar to [shadcn/ui](https://ui.shadcn.com/)).
+
+#### Initialize
+
+```sh
+npx @blink-ui/cli init
+```
+
+This prompts for your framework, output directory, and custom element prefix, then creates `blink.config.json` and downloads the design tokens.
+
+#### Add components
+
+```sh
+npx @blink-ui/cli add button alert    # Add specific components
+npx @blink-ui/cli add --all           # Add all components
+npx @blink-ui/cli add button --overwrite  # Overwrite existing files
+```
+
+#### List available components
+
+```sh
+npx @blink-ui/cli list
+```
+
+#### Check for differences
+
+```sh
+npx @blink-ui/cli diff button
+```
+
+Shows a unified diff between your local version and the registry, so you can see what you've customized.
+
+#### Custom prefix
+
+If you initialize with a custom prefix (e.g. `my` instead of `bl`), the CLI automatically rewrites:
+
+- Element tags: `<bl-button>` → `<my-button>`
+- Class names: `BlButton` → `MyButton`
+- CSS custom properties: `--bl-color-primary-500` → `--my-color-primary-500`
+- Custom events: `bl-dismiss` → `my-dismiss`
+
+#### Result
+
+After `blink init` + `blink add button alert`, your project looks like:
+
+```
+your-project/
+  blink.config.json
+  src/components/ui/
+    styles/tokens.ts
+    button/
+      button.ts
+      button.styles.ts
+      index.ts
+    alert/
+      alert.ts
+      alert.styles.ts
+      index.ts
+```
+
+Each component imports tokens via `../styles/tokens`, so the paths resolve correctly out of the box.
 
 ## Theming
 
@@ -167,6 +235,17 @@ See `packages/ui/src/styles/tokens.ts` for the full list of available tokens.
 5. Add an entry to `packages/ui/tsup.config.ts`
 6. Add an export path to `packages/ui/package.json`
 7. Create a Storybook story in `apps/docs/stories/`
+8. Run `bun run build:registry` to regenerate the registry JSON files
+
+## Building the Registry
+
+The registry contains static JSON files with component source code, served via GitHub raw URLs. To regenerate after changing components:
+
+```sh
+bun run build:registry
+```
+
+This reads from `packages/ui/src/`, rewrites token import paths, and outputs to `registry/`.
 
 ## Versioning & Publishing
 
