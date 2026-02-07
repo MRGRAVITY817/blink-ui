@@ -1,0 +1,22 @@
+{
+  "name": "separator",
+  "tag": "bl-separator",
+  "registryDependencies": [],
+  "npmDependencies": {
+    "lit": "^3.2.0"
+  },
+  "files": [
+    {
+      "path": "separator/separator.ts",
+      "content": "import { LitElement, html, nothing } from 'lit';\nimport { customElement, property } from 'lit/decorators.js';\nimport { tokens } from '../../styles/tokens.js';\nimport { separatorStyles } from './separator.styles.js';\n\nexport type SeparatorOrientation = 'horizontal' | 'vertical';\n\n/**\n * A content divider for the Blink UI design system.\n *\n * @element bl-separator\n * @csspart separator - The separator element.\n */\n@customElement('bl-separator')\nexport class BlSeparator extends LitElement {\n  static override styles = [tokens, separatorStyles];\n\n  /** Orientation of the separator. */\n  @property({ reflect: true })\n  orientation: SeparatorOrientation = 'horizontal';\n\n  /** When true, the separator is purely decorative and omits the separator role. */\n  @property({ type: Boolean, reflect: true })\n  decorative = false;\n\n  protected override render() {\n    return html`\n      <div\n        part=\"separator\"\n        role=${this.decorative ? nothing : 'separator'}\n        aria-orientation=${this.decorative ? nothing : this.orientation}\n      ></div>\n    `;\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    'bl-separator': BlSeparator;\n  }\n}\n"
+    },
+    {
+      "path": "separator/separator.styles.ts",
+      "content": "import { css } from 'lit';\n\nexport const separatorStyles = css`\n  :host {\n    display: block;\n  }\n\n  :host([orientation='vertical']) {\n    display: inline-block;\n    height: auto;\n    align-self: stretch;\n  }\n\n  [part='separator'] {\n    border: none;\n    margin: 0;\n    background-color: var(--bl-color-neutral-200);\n  }\n\n  :host(:not([orientation='vertical'])) [part='separator'] {\n    height: 1px;\n    width: 100%;\n  }\n\n  :host([orientation='vertical']) [part='separator'] {\n    width: 1px;\n    height: 100%;\n    min-height: 1rem;\n  }\n`;\n"
+    },
+    {
+      "path": "separator/index.ts",
+      "content": "export { BlSeparator } from './separator.js';\nexport type { SeparatorOrientation } from './separator.js';\n"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "visually-hidden",
+  "tag": "bl-visually-hidden",
+  "registryDependencies": [],
+  "npmDependencies": {
+    "lit": "^3.2.0"
+  },
+  "files": [
+    {
+      "path": "visually-hidden/visually-hidden.styles.ts",
+      "content": "import { css } from 'lit';\n\nexport const visuallyHiddenStyles = css`\n  :host {\n    position: absolute !important;\n    width: 1px !important;\n    height: 1px !important;\n    padding: 0 !important;\n    margin: -1px !important;\n    overflow: hidden !important;\n    clip: rect(0, 0, 0, 0) !important;\n    white-space: nowrap !important;\n    border: 0 !important;\n  }\n`;\n"
+    },
+    {
+      "path": "visually-hidden/visually-hidden.ts",
+      "content": "import { LitElement, html } from 'lit';\nimport { customElement } from 'lit/decorators.js';\nimport { visuallyHiddenStyles } from './visually-hidden.styles.js';\n\n/**\n * Visually hidden but accessible to screen readers.\n *\n * @element bl-visually-hidden\n * @slot - Content that is visually hidden but read by screen readers.\n */\n@customElement('bl-visually-hidden')\nexport class BlVisuallyHidden extends LitElement {\n  static override styles = [visuallyHiddenStyles];\n\n  protected override render() {\n    return html`<slot></slot>`;\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    'bl-visually-hidden': BlVisuallyHidden;\n  }\n}\n"
+    },
+    {
+      "path": "visually-hidden/index.ts",
+      "content": "export { BlVisuallyHidden } from './visually-hidden.js';\n"
+    }
+  ]
+}

@@ -11,6 +11,15 @@
       }
     },
     {
+      "name": "avatar",
+      "description": "An avatar component with image and initials fallback.",
+      "tag": "bl-avatar",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
       "name": "badge",
       "description": "A lightweight badge component for the Blink UI design system.",
       "tag": "bl-badge",
@@ -38,9 +47,132 @@
       }
     },
     {
+      "name": "checkbox",
+      "description": "A checkbox with `aria-checked` supporting indeterminate (mixed) state.",
+      "tag": "bl-checkbox",
+      "registryDependencies": [
+        "label"
+      ],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "icon",
+      "description": "SVG icon wrapper. Decorative by default (`aria-hidden=\"true\"`),",
+      "tag": "bl-icon",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
       "name": "input",
       "description": "A text input component for the Blink UI design system.",
       "tag": "bl-input",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "label",
+      "description": "A form label that associates with form controls via `for`/`id`.",
+      "tag": "bl-label",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "radio",
+      "description": "An individual radio button. Must be inside `bl-radio-group`.",
+      "tag": "bl-radio",
+      "registryDependencies": [
+        "label"
+      ],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "radio-group",
+      "description": "A radio group that manages selection among `bl-radio` children.",
+      "tag": "bl-radio-group",
+      "registryDependencies": [
+        "radio"
+      ],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "separator",
+      "description": "A content divider for the Blink UI design system.",
+      "tag": "bl-separator",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "skeleton",
+      "description": "A placeholder loading state with animated pulse.",
+      "tag": "bl-skeleton",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "spinner",
+      "description": "A loading spinner with screen reader announcement.",
+      "tag": "bl-spinner",
+      "registryDependencies": [
+        "visually-hidden"
+      ],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "switch",
+      "description": "An on/off toggle switch with `role=\"switch\"` and `aria-checked`.",
+      "tag": "bl-switch",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "toggle",
+      "description": "A pressable toggle button with `aria-pressed`.",
+      "tag": "bl-toggle",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "live-announce",
+      "description": "Programmatic screen reader announcements via aria-live.",
+      "tag": "",
+      "registryDependencies": [],
+      "npmDependencies": {}
+    },
+    {
+      "name": "portal",
+      "description": "Renders children outside the parent DOM hierarchy.",
+      "tag": "bl-portal",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "visually-hidden",
+      "description": "Visually hidden but accessible to screen readers.",
+      "tag": "bl-visually-hidden",
       "registryDependencies": [],
       "npmDependencies": {
         "lit": "^3.2.0"

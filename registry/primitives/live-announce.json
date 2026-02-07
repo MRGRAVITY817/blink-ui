@@ -1,0 +1,16 @@
+{
+  "name": "live-announce",
+  "tag": "",
+  "registryDependencies": [],
+  "npmDependencies": {},
+  "files": [
+    {
+      "path": "live-announce/live-announce.ts",
+      "content": "let liveRegion: HTMLDivElement | null = null;\n\nfunction getOrCreateRegion(): HTMLDivElement {\n  if (liveRegion && document.body.contains(liveRegion)) {\n    return liveRegion;\n  }\n\n  liveRegion = document.createElement('div');\n  liveRegion.setAttribute('data-bl-live', '');\n  liveRegion.style.cssText =\n    'position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;';\n  document.body.appendChild(liveRegion);\n  return liveRegion;\n}\n\n/**\n * Programmatically announce a message to screen readers via an `aria-live` region.\n *\n * Creates a shared live region in the DOM on first call. Subsequent calls\n * reuse the same region.\n *\n * @param message - The text to announce.\n * @param politeness - 'polite' waits for the user to be idle; 'assertive' interrupts immediately.\n */\nexport function announce(message: string, politeness: 'polite' | 'assertive' = 'polite'): void {\n  const region = getOrCreateRegion();\n  region.setAttribute('aria-live', politeness);\n  region.setAttribute('role', politeness === 'assertive' ? 'alert' : 'status');\n\n  // Clear and re-set to trigger a new announcement\n  region.textContent = '';\n  requestAnimationFrame(() => {\n    region.textContent = message;\n  });\n}\n"
+    },
+    {
+      "path": "live-announce/index.ts",
+      "content": "export { announce } from './live-announce.js';\n"
+    }
+  ]
+}

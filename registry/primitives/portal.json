@@ -1,0 +1,22 @@
+{
+  "name": "portal",
+  "tag": "bl-portal",
+  "registryDependencies": [],
+  "npmDependencies": {
+    "lit": "^3.2.0"
+  },
+  "files": [
+    {
+      "path": "portal/index.ts",
+      "content": "export { BlPortal } from './portal.js';\n"
+    },
+    {
+      "path": "portal/portal.ts",
+      "content": "import { LitElement, html } from 'lit';\nimport { customElement, property } from 'lit/decorators.js';\nimport { portalStyles } from './portal.styles.js';\n\n/**\n * Renders children outside the parent DOM hierarchy (into document.body by default).\n *\n * @element bl-portal\n * @slot - Content to render in the portal target.\n */\n@customElement('bl-portal')\nexport class BlPortal extends LitElement {\n  static override styles = [portalStyles];\n\n  /** CSS selector for the target container. Default: 'body' */\n  @property()\n  container = 'body';\n\n  private _portalContainer: HTMLDivElement | null = null;\n  private _observer: MutationObserver | null = null;\n\n  override connectedCallback(): void {\n    super.connectedCallback();\n    this._createPortal();\n  }\n\n  override disconnectedCallback(): void {\n    super.disconnectedCallback();\n    this._destroyPortal();\n  }\n\n  private _createPortal(): void {\n    const target = document.querySelector(this.container);\n    if (!target) return;\n\n    this._portalContainer = document.createElement('div');\n    this._portalContainer.setAttribute('data-bl-portal', '');\n    target.appendChild(this._portalContainer);\n\n    this._moveSlottedContent();\n\n    // Observe slot changes to keep portal content in sync\n    this._observer = new MutationObserver(() => this._moveSlottedContent());\n    this._observer.observe(this, { childList: true, subtree: true });\n  }\n\n  private _destroyPortal(): void {\n    this._observer?.disconnect();\n    this._observer = null;\n    this._portalContainer?.remove();\n    this._portalContainer = null;\n  }\n\n  private _moveSlottedContent(): void {\n    if (!this._portalContainer) return;\n    // Clone children into portal target\n    this._portalContainer.innerHTML = '';\n    for (const child of Array.from(this.childNodes)) {\n      this._portalContainer.appendChild(child.cloneNode(true));\n    }\n  }\n\n  protected override render() {\n    return html`<slot></slot>`;\n  }\n}\n\ndeclare global {\n  interface HTMLElementTagNameMap {\n    'bl-portal': BlPortal;\n  }\n}\n"
+    },
+    {
+      "path": "portal/portal.styles.ts",
+      "content": "import { css } from 'lit';\n\nexport const portalStyles = css`\n  :host {\n    display: none !important;\n  }\n`;\n"
+    }
+  ]
+}

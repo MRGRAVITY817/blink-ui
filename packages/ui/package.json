@@ -32,6 +32,66 @@
       "types": "./dist/components/alert/index.d.ts",
       "import": "./dist/components/alert/index.js"
     },
+    "./separator": {
+      "types": "./dist/components/separator/index.d.ts",
+      "import": "./dist/components/separator/index.js"
+    },
+    "./label": {
+      "types": "./dist/components/label/index.d.ts",
+      "import": "./dist/components/label/index.js"
+    },
+    "./avatar": {
+      "types": "./dist/components/avatar/index.d.ts",
+      "import": "./dist/components/avatar/index.js"
+    },
+    "./spinner": {
+      "types": "./dist/components/spinner/index.d.ts",
+      "import": "./dist/components/spinner/index.js"
+    },
+    "./skeleton": {
+      "types": "./dist/components/skeleton/index.d.ts",
+      "import": "./dist/components/skeleton/index.js"
+    },
+    "./icon": {
+      "types": "./dist/components/icon/index.d.ts",
+      "import": "./dist/components/icon/index.js"
+    },
+    "./toggle": {
+      "types": "./dist/components/toggle/index.d.ts",
+      "import": "./dist/components/toggle/index.js"
+    },
+    "./checkbox": {
+      "types": "./dist/components/checkbox/index.d.ts",
+      "import": "./dist/components/checkbox/index.js"
+    },
+    "./switch": {
+      "types": "./dist/components/switch/index.d.ts",
+      "import": "./dist/components/switch/index.js"
+    },
+    "./radio": {
+      "types": "./dist/components/radio/index.d.ts",
+      "import": "./dist/components/radio/index.js"
+    },
+    "./radio-group": {
+      "types": "./dist/components/radio-group/index.d.ts",
+      "import": "./dist/components/radio-group/index.js"
+    },
+    "./visually-hidden": {
+      "types": "./dist/primitives/visually-hidden/index.d.ts",
+      "import": "./dist/primitives/visually-hidden/index.js"
+    },
+    "./portal": {
+      "types": "./dist/primitives/portal/index.d.ts",
+      "import": "./dist/primitives/portal/index.js"
+    },
+    "./live-announce": {
+      "types": "./dist/primitives/live-announce/index.d.ts",
+      "import": "./dist/primitives/live-announce/index.js"
+    },
+    "./controllers": {
+      "types": "./dist/controllers/index.d.ts",
+      "import": "./dist/controllers/index.js"
+    },
     "./define": {
       "types": "./dist/define.d.ts",
       "import": "./dist/define.js"
