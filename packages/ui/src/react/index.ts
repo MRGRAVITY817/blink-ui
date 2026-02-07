@@ -331,6 +331,7 @@ import { BlFormFieldset } from '../components/form-layout/form-fieldset.js';
 import { BlPageHeader } from '../components/page-header/page-header.js';
 import { BlBreadcrumb } from '../components/page-header/breadcrumb.js';
 import { BlBreadcrumbItem } from '../components/page-header/breadcrumb-item.js';
+import { BlPageHeaderAvatar } from '../components/page-header/page-header-avatar.js';
 import { BlSidebar } from '../components/sidebar/sidebar.js';
 import { BlSidebarHeader } from '../components/sidebar/sidebar-header.js';
 import { BlSidebarContent } from '../components/sidebar/sidebar-content.js';
@@ -340,10 +341,16 @@ import { BlSidebarGroupLabel } from '../components/sidebar/sidebar-group-label.j
 import { BlSidebarMenu } from '../components/sidebar/sidebar-menu.js';
 import { BlSidebarMenuItem } from '../components/sidebar/sidebar-menu-item.js';
 import { BlSidebarTrigger } from '../components/sidebar/sidebar-trigger.js';
+import { BlSidebarMenuSub } from '../components/sidebar/sidebar-menu-sub.js';
+import { BlSidebarMenuAction } from '../components/sidebar/sidebar-menu-action.js';
+import { BlSidebarMenuSkeleton } from '../components/sidebar/sidebar-menu-skeleton.js';
+import { BlSidebarRail } from '../components/sidebar/sidebar-rail.js';
 import { BlCombobox } from '../components/combobox/combobox.js';
 import { BlComboboxItem } from '../components/combobox/combobox-item.js';
 import { BlComboboxGroup } from '../components/combobox/combobox-group.js';
 import { BlComboboxEmpty } from '../components/combobox/combobox-empty.js';
+import { BlComboboxChips } from '../components/combobox/combobox-chips.js';
+import { BlComboboxTrigger } from '../components/combobox/combobox-trigger.js';
 import { BlCommand } from '../components/command/command.js';
 import { BlCommandDialog } from '../components/command/command-dialog.js';
 import { BlCommandInput } from '../components/command/command-input.js';
@@ -353,6 +360,7 @@ import { BlCommandItem } from '../components/command/command-item.js';
 import { BlCommandEmpty } from '../components/command/command-empty.js';
 import { BlCommandSeparator } from '../components/command/command-separator.js';
 import { BlCommandShortcut } from '../components/command/command-shortcut.js';
+import { BlCommandLoading } from '../components/command/command-loading.js';
 import { BlDataTable } from '../components/data-table/data-table.js';
 import { BlTableHeader } from '../components/data-table/table-header.js';
 import { BlTableBody } from '../components/data-table/table-body.js';
@@ -360,11 +368,18 @@ import { BlTableRow } from '../components/data-table/table-row.js';
 import { BlTableHeaderCell } from '../components/data-table/table-header-cell.js';
 import { BlTableCell } from '../components/data-table/table-cell.js';
 import { BlTablePagination } from '../components/data-table/table-pagination.js';
+import { BlTableToolbar } from '../components/data-table/table-toolbar.js';
+import { BlTableColumnVisibility } from '../components/data-table/table-column-visibility.js';
+import { BlTableFacetedFilter } from '../components/data-table/table-faceted-filter.js';
 import { BlDatePicker } from '../components/date-picker/date-picker.js';
 import { BlDateField } from '../components/date-picker/date-field.js';
 import { BlDateSegment } from '../components/date-picker/date-segment.js';
 import { BlCalendar } from '../components/date-picker/calendar.js';
 import { BlCalendarCell } from '../components/date-picker/calendar-cell.js';
+import { BlRangeCalendar } from '../components/date-picker/range-calendar.js';
+import { BlDateRangePicker } from '../components/date-picker/date-range-picker.js';
+import { BlCalendarPresets } from '../components/date-picker/calendar-presets.js';
+import { BlCalendarCard } from '../components/date-picker/calendar-card.js';
 
 export const FormLayout = createComponent({
   tagName: 'bl-form-layout',
@@ -411,6 +426,12 @@ export const Breadcrumb = createComponent({
 export const BreadcrumbItem = createComponent({
   tagName: 'bl-breadcrumb-item',
   elementClass: BlBreadcrumbItem,
+  react: React,
+});
+
+export const PageHeaderAvatar = createComponent({
+  tagName: 'bl-page-header-avatar',
+  elementClass: BlPageHeaderAvatar,
   react: React,
 });
 
@@ -474,6 +495,39 @@ export const SidebarTrigger = createComponent({
   react: React,
 });
 
+export const SidebarMenuSub = createComponent({
+  tagName: 'bl-sidebar-menu-sub',
+  elementClass: BlSidebarMenuSub,
+  react: React,
+  events: {
+    onBlSidebarSubToggle: 'bl-sidebar-sub-toggle' as EventName<CustomEvent<{ open: boolean }>>,
+  },
+});
+
+export const SidebarMenuAction = createComponent({
+  tagName: 'bl-sidebar-menu-action',
+  elementClass: BlSidebarMenuAction,
+  react: React,
+  events: {
+    onBlSidebarActionClick: 'bl-sidebar-action-click' as EventName<CustomEvent>,
+  },
+});
+
+export const SidebarMenuSkeleton = createComponent({
+  tagName: 'bl-sidebar-menu-skeleton',
+  elementClass: BlSidebarMenuSkeleton,
+  react: React,
+});
+
+export const SidebarRail = createComponent({
+  tagName: 'bl-sidebar-rail',
+  elementClass: BlSidebarRail,
+  react: React,
+  events: {
+    onBlSidebarToggle: 'bl-sidebar-toggle' as EventName<CustomEvent>,
+  },
+});
+
 export const Combobox = createComponent({
   tagName: 'bl-combobox',
   elementClass: BlCombobox,
@@ -500,6 +554,24 @@ export const ComboboxEmpty = createComponent({
   tagName: 'bl-combobox-empty',
   elementClass: BlComboboxEmpty,
   react: React,
+});
+
+export const ComboboxChips = createComponent({
+  tagName: 'bl-combobox-chips',
+  elementClass: BlComboboxChips,
+  react: React,
+  events: {
+    onBlChipRemove: 'bl-chip-remove' as EventName<CustomEvent<{ value: string }>>,
+  },
+});
+
+export const ComboboxTrigger = createComponent({
+  tagName: 'bl-combobox-trigger',
+  elementClass: BlComboboxTrigger,
+  react: React,
+  events: {
+    onBlTriggerClick: 'bl-trigger-click' as EventName<CustomEvent>,
+  },
 });
 
 export const Command = createComponent({
@@ -560,6 +632,12 @@ export const CommandShortcut = createComponent({
   react: React,
 });
 
+export const CommandLoading = createComponent({
+  tagName: 'bl-command-loading',
+  elementClass: BlCommandLoading,
+  react: React,
+});
+
 export const DataTable = createComponent({
   tagName: 'bl-data-table',
   elementClass: BlDataTable,
@@ -610,6 +688,33 @@ export const TablePagination = createComponent({
   },
 });
 
+export const TableToolbar = createComponent({
+  tagName: 'bl-table-toolbar',
+  elementClass: BlTableToolbar,
+  react: React,
+  events: {
+    onBlToolbarSearch: 'bl-toolbar-search' as EventName<CustomEvent<{ value: string }>>,
+  },
+});
+
+export const TableColumnVisibility = createComponent({
+  tagName: 'bl-table-column-visibility',
+  elementClass: BlTableColumnVisibility,
+  react: React,
+  events: {
+    onBlColumnVisibilityChange: 'bl-column-visibility-change' as EventName<CustomEvent>,
+  },
+});
+
+export const TableFacetedFilter = createComponent({
+  tagName: 'bl-table-faceted-filter',
+  elementClass: BlTableFacetedFilter,
+  react: React,
+  events: {
+    onBlFacetedFilterChange: 'bl-faceted-filter-change' as EventName<CustomEvent>,
+  },
+});
+
 export const DatePicker = createComponent({
   tagName: 'bl-date-picker',
   elementClass: BlDatePicker,
@@ -641,6 +746,7 @@ export const Calendar = createComponent({
   react: React,
   events: {
     onBlDateChange: 'bl-date-change' as EventName<CustomEvent<{ value: string }>>,
+    onBlDateRangeChange: 'bl-date-range-change' as EventName<CustomEvent<{ start: string; end: string }>>,
   },
 });
 
@@ -648,6 +754,43 @@ export const CalendarCell = createComponent({
   tagName: 'bl-calendar-cell',
   elementClass: BlCalendarCell,
   react: React,
+});
+
+export const RangeCalendar = createComponent({
+  tagName: 'bl-range-calendar',
+  elementClass: BlRangeCalendar,
+  react: React,
+  events: {
+    onBlDateRangeChange: 'bl-date-range-change' as EventName<CustomEvent<{ start: string; end: string }>>,
+  },
+});
+
+export const DateRangePicker = createComponent({
+  tagName: 'bl-date-range-picker',
+  elementClass: BlDateRangePicker,
+  react: React,
+  events: {
+    onBlDateRangeChange: 'bl-date-range-change' as EventName<CustomEvent<{ start: string; end: string }>>,
+  },
+});
+
+export const CalendarPresets = createComponent({
+  tagName: 'bl-calendar-presets',
+  elementClass: BlCalendarPresets,
+  react: React,
+  events: {
+    onBlPresetSelect: 'bl-preset-select' as EventName<CustomEvent<{ key: string; start: string; end: string }>>,
+  },
+});
+
+export const CalendarCard = createComponent({
+  tagName: 'bl-calendar-card',
+  elementClass: BlCalendarCard,
+  react: React,
+  events: {
+    onBlCalendarApply: 'bl-calendar-apply' as EventName<CustomEvent<{ start: string; end: string }>>,
+    onBlCalendarCancel: 'bl-calendar-cancel' as EventName<CustomEvent>,
+  },
 });
 
 // Re-export imperative toast() API

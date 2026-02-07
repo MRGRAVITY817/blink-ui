@@ -109,15 +109,20 @@ export const commandInputStyles = css`
 export const commandListStyles = css`
   :host {
     display: block;
-    max-height: 300px;
+    max-height: var(--bl-command-list-height, 300px);
     overflow-y: auto;
     padding: var(--bl-spacing-xs);
+    transition: max-height var(--bl-transition-normal);
   }
 `;
 
 export const commandGroupStyles = css`
   :host {
     display: block;
+  }
+
+  :host([hidden]) {
+    display: none;
   }
 
   :host(:not(:first-child)) {
@@ -196,6 +201,54 @@ export const commandEmptyStyles = css`
     font-size: var(--bl-font-size-sm);
     color: var(--bl-color-neutral-500);
     font-family: var(--bl-font-family-base);
+  }
+
+  :host([hidden]) {
+    display: none;
+  }
+`;
+
+export const commandLoadingStyles = css`
+  :host {
+    display: block;
+    padding: var(--bl-spacing-sm) var(--bl-spacing-md);
+    font-family: var(--bl-font-family-base);
+  }
+
+  :host([hidden]) {
+    display: none;
+  }
+
+  .loading {
+    display: flex;
+    align-items: center;
+    gap: var(--bl-spacing-sm);
+    font-size: var(--bl-font-size-sm);
+    color: var(--bl-color-neutral-500);
+  }
+
+  .progress-bar {
+    height: 2px;
+    background-color: var(--bl-color-neutral-200);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background-color: var(--bl-color-primary-500);
+    border-radius: 1px;
+    transition: width var(--bl-transition-fast);
+  }
+
+  .progress-fill.indeterminate {
+    width: 40%;
+    animation: indeterminate 1.5s ease-in-out infinite;
+  }
+
+  @keyframes indeterminate {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(350%); }
   }
 `;
 

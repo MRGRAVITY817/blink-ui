@@ -7,3 +7,4 @@ export { BlCommandItem } from './command-item.js';
 export { BlCommandEmpty } from './command-empty.js';
 export { BlCommandSeparator } from './command-separator.js';
 export { BlCommandShortcut } from './command-shortcut.js';
+export { BlCommandLoading } from './command-loading.js';

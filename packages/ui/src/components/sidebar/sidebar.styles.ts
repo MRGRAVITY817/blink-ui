@@ -3,7 +3,8 @@ import { css } from 'lit';
 export const sidebarStyles = css`
   :host {
     --bl-sidebar-width: 260px;
-    --bl-sidebar-collapsed-width: 56px;
+    --bl-sidebar-width-collapsed: 56px;
+    --bl-sidebar-collapsed-width: var(--bl-sidebar-width-collapsed);
     --bl-sidebar-breakpoint: 768px;
     display: block;
     font-family: var(--bl-font-family-base);
@@ -21,7 +22,43 @@ export const sidebarStyles = css`
   }
 
   :host([collapsed]) .sidebar {
-    width: var(--bl-sidebar-collapsed-width);
+    width: var(--bl-sidebar-width-collapsed);
+  }
+
+  /* Variant: floating */
+  :host([variant='floating']) .sidebar {
+    margin: var(--bl-spacing-sm);
+    height: calc(100% - var(--bl-spacing-md));
+    border-radius: var(--bl-radius-lg);
+    border: 1px solid var(--bl-color-neutral-200);
+    box-shadow: var(--bl-shadow-lg);
+  }
+
+  /* Variant: inset */
+  :host([variant='inset']) .sidebar {
+    border-right: none;
+    background-color: var(--bl-color-neutral-50);
+  }
+
+  /* Collapsible: icon mode - hide labels/badges in collapsed state */
+  :host([collapsible='icon'][collapsed]) .sidebar {
+    width: var(--bl-sidebar-width-collapsed);
+  }
+
+  /* Collapsible: offcanvas mode - fully hide sidebar */
+  :host([collapsible='offcanvas'][collapsed]) .sidebar {
+    width: 0;
+    border-right-width: 0;
+    overflow: hidden;
+  }
+
+  :host([collapsible='offcanvas'][collapsed]) {
+    width: 0;
+  }
+
+  /* Collapsible: none - do not collapse */
+  :host([collapsible='none']) .sidebar {
+    width: var(--bl-sidebar-width);
   }
 
   /* Drawer mode (mobile) */
@@ -100,6 +137,58 @@ export const sidebarGroupStyles = css`
     margin-top: var(--bl-spacing-xs);
     padding-top: var(--bl-spacing-sm);
   }
+
+  .group-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    padding: 0;
+    margin: 0;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+  }
+
+  :host(:not([collapsible])) .group-label {
+    cursor: default;
+  }
+
+  .group-label-text {
+    flex: 1;
+  }
+
+  .chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    margin-right: var(--bl-spacing-xs);
+    color: var(--bl-color-neutral-400);
+    transition: transform var(--bl-transition-fast);
+    flex-shrink: 0;
+  }
+
+  :host(:not([collapsible])) .chevron {
+    display: none;
+  }
+
+  :host([collapsed]) .chevron {
+    transform: rotate(-90deg);
+  }
+
+  .group-content {
+    overflow: hidden;
+    transition: height var(--bl-transition-normal);
+  }
+
+  .group-content-inner {
+    /* This div provides measurable height for animation */
+  }
 `;
 
 export const sidebarGroupLabelStyles = css`
@@ -130,6 +219,7 @@ export const sidebarMenuStyles = css`
 export const sidebarMenuItemStyles = css`
   :host {
     display: block;
+    position: relative;
   }
 
   .menu-item {
@@ -157,7 +247,8 @@ export const sidebarMenuItemStyles = css`
     color: var(--bl-color-neutral-900);
   }
 
-  :host([active]) .menu-item {
+  :host([active]) .menu-item,
+  :host([isActive]) .menu-item {
     background-color: var(--bl-color-primary-50);
     color: var(--bl-color-primary-700);
     font-weight: 500;
@@ -192,6 +283,29 @@ export const sidebarMenuItemStyles = css`
   .badge {
     flex-shrink: 0;
   }
+
+  /* Tooltip for icon-only collapsed mode */
+  .tooltip {
+    position: absolute;
+    left: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: var(--bl-z-dropdown);
+    padding: var(--bl-spacing-xs) var(--bl-spacing-sm);
+    background-color: var(--bl-color-neutral-800);
+    color: #fff;
+    font-size: var(--bl-font-size-xs);
+    border-radius: var(--bl-radius-sm);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--bl-transition-fast);
+    box-shadow: var(--bl-shadow-md);
+  }
+
+  .tooltip[data-visible] {
+    opacity: 1;
+  }
 `;
 
 export const sidebarTriggerStyles = css`
@@ -224,5 +338,249 @@ export const sidebarTriggerStyles = css`
   button:focus-visible {
     outline: 2px solid var(--bl-focus-ring-color);
     outline-offset: 2px;
+  }
+`;
+
+/* --- New style exports for Phase 4 --- */
+
+export const sidebarMenuSubStyles = css`
+  :host {
+    display: block;
+  }
+
+  .sub-trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--bl-spacing-sm);
+    padding: var(--bl-spacing-sm) var(--bl-spacing-sm);
+    border-radius: var(--bl-radius-md);
+    color: var(--bl-color-neutral-600);
+    font-size: var(--bl-font-size-sm);
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    font-family: var(--bl-font-family-base);
+    transition:
+      background-color var(--bl-transition-fast),
+      color var(--bl-transition-fast);
+  }
+
+  .sub-trigger:hover {
+    background-color: var(--bl-color-neutral-100);
+    color: var(--bl-color-neutral-900);
+  }
+
+  .sub-trigger:focus-visible {
+    outline: 2px solid var(--bl-focus-ring-color);
+    outline-offset: -2px;
+  }
+
+  .sub-trigger-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .sub-trigger-label {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .sub-trigger-chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: var(--bl-color-neutral-400);
+    transition: transform var(--bl-transition-fast);
+  }
+
+  :host([open]) .sub-trigger-chevron {
+    transform: rotate(90deg);
+  }
+
+  .sub-content {
+    overflow: hidden;
+    height: 0;
+    transition: height var(--bl-transition-normal);
+  }
+
+  :host([open]) .sub-content {
+    /* height is set dynamically via JS */
+  }
+
+  .sub-content-inner {
+    padding-left: var(--bl-spacing-lg);
+    padding-top: var(--bl-spacing-xs);
+    padding-bottom: var(--bl-spacing-xs);
+  }
+
+  /* Indentation line for nested items */
+  .sub-content-inner::before {
+    content: '';
+    position: absolute;
+    left: calc(var(--bl-spacing-sm) + 9px);
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: var(--bl-color-neutral-200);
+  }
+
+  .sub-content-inner {
+    position: relative;
+  }
+`;
+
+export const sidebarMenuActionStyles = css`
+  :host {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  :host([show-on-hover]) {
+    opacity: 0;
+    transition: opacity var(--bl-transition-fast);
+  }
+
+  /* Show when parent is hovered - use :host-context or slotted approach */
+  :host([data-visible]),
+  :host(:hover),
+  :host(:focus-within) {
+    opacity: 1;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: none;
+    background: none;
+    border-radius: var(--bl-radius-sm);
+    color: var(--bl-color-neutral-400);
+    cursor: pointer;
+    transition:
+      background-color var(--bl-transition-fast),
+      color var(--bl-transition-fast);
+  }
+
+  button:hover {
+    background-color: var(--bl-color-neutral-200);
+    color: var(--bl-color-neutral-700);
+  }
+
+  button:focus-visible {
+    outline: 2px solid var(--bl-focus-ring-color);
+    outline-offset: 1px;
+  }
+`;
+
+export const sidebarRailStyles = css`
+  :host {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: -4px;
+    width: 8px;
+    height: 100%;
+    z-index: 1;
+    cursor: ew-resize;
+  }
+
+  .rail {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--bl-transition-fast);
+  }
+
+  .rail::after {
+    content: '';
+    width: 2px;
+    height: 100%;
+    background-color: transparent;
+    transition: background-color var(--bl-transition-fast);
+    border-radius: var(--bl-radius-full);
+  }
+
+  .rail:hover::after {
+    background-color: var(--bl-color-primary-400);
+  }
+
+  :host(:hover) .rail::after {
+    background-color: var(--bl-color-primary-400);
+  }
+
+  .rail:focus-visible {
+    outline: 2px solid var(--bl-focus-ring-color);
+    outline-offset: -2px;
+    border-radius: var(--bl-radius-sm);
+  }
+`;
+
+export const sidebarMenuSkeletonStyles = css`
+  :host {
+    display: block;
+    padding: var(--bl-spacing-xs) 0;
+  }
+
+  .skeleton-item {
+    display: flex;
+    align-items: center;
+    gap: var(--bl-spacing-sm);
+    padding: var(--bl-spacing-sm) var(--bl-spacing-sm);
+    border-radius: var(--bl-radius-md);
+  }
+
+  .skeleton-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: var(--bl-radius-sm);
+    background-color: var(--bl-color-neutral-200);
+    flex-shrink: 0;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+  }
+
+  .skeleton-text {
+    height: 14px;
+    border-radius: var(--bl-radius-sm);
+    background-color: var(--bl-color-neutral-200);
+    flex: 1;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+    animation-delay: 75ms;
+  }
+
+  /* Vary widths for visual interest */
+  .skeleton-item:nth-child(1) .skeleton-text { width: 75%; flex: none; }
+  .skeleton-item:nth-child(2) .skeleton-text { width: 60%; flex: none; }
+  .skeleton-item:nth-child(3) .skeleton-text { width: 85%; flex: none; }
+  .skeleton-item:nth-child(4) .skeleton-text { width: 50%; flex: none; }
+  .skeleton-item:nth-child(5) .skeleton-text { width: 70%; flex: none; }
+  .skeleton-item:nth-child(6) .skeleton-text { width: 65%; flex: none; }
+  .skeleton-item:nth-child(7) .skeleton-text { width: 80%; flex: none; }
+  .skeleton-item:nth-child(8) .skeleton-text { width: 55%; flex: none; }
+
+  @keyframes skeleton-pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
   }
 `;

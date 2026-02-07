@@ -50,17 +50,21 @@ export type { ToastVariant, ToastPosition, ToastOptions } from './components/toa
 
 // v0.5 Components
 export { BlFormLayout, BlFormField, BlFormDescription, BlFormError, BlFormFieldset } from './components/form-layout/index.js';
-export { BlPageHeader, BlBreadcrumb, BlBreadcrumbItem } from './components/page-header/index.js';
-export { BlSidebar, BlSidebarHeader, BlSidebarContent, BlSidebarFooter, BlSidebarGroup, BlSidebarGroupLabel, BlSidebarMenu, BlSidebarMenuItem, BlSidebarTrigger } from './components/sidebar/index.js';
-export { BlCombobox, BlComboboxItem, BlComboboxGroup, BlComboboxEmpty } from './components/combobox/index.js';
-export { BlCommand, BlCommandDialog, BlCommandInput, BlCommandList, BlCommandGroup, BlCommandItem, BlCommandEmpty, BlCommandSeparator, BlCommandShortcut } from './components/command/index.js';
-export { BlDataTable, BlTableHeader, BlTableBody, BlTableRow, BlTableHeaderCell, BlTableCell, BlTablePagination } from './components/data-table/index.js';
-export { BlDatePicker, BlDateField, BlDateSegment, BlCalendar, BlCalendarCell } from './components/date-picker/index.js';
+export { BlPageHeader, BlBreadcrumb, BlBreadcrumbItem, BlPageHeaderAvatar } from './components/page-header/index.js';
+export { BlSidebar, BlSidebarHeader, BlSidebarContent, BlSidebarFooter, BlSidebarGroup, BlSidebarGroupLabel, BlSidebarMenu, BlSidebarMenuItem, BlSidebarMenuSub, BlSidebarMenuAction, BlSidebarMenuSkeleton, BlSidebarRail, BlSidebarTrigger } from './components/sidebar/index.js';
+export type { SidebarVariant, SidebarCollapsible } from './components/sidebar/index.js';
+export { BlCombobox, BlComboboxItem, BlComboboxGroup, BlComboboxEmpty, BlComboboxChips, BlComboboxTrigger } from './components/combobox/index.js';
+export { BlCommand, BlCommandDialog, BlCommandInput, BlCommandList, BlCommandGroup, BlCommandItem, BlCommandEmpty, BlCommandSeparator, BlCommandShortcut, BlCommandLoading } from './components/command/index.js';
+export { BlDataTable, BlTableHeader, BlTableBody, BlTableRow, BlTableHeaderCell, BlTableCell, BlTablePagination, BlTableToolbar, BlTableColumnVisibility, BlTableFacetedFilter } from './components/data-table/index.js';
+export { BlDatePicker, BlDateField, BlDateSegment, BlCalendar, BlCalendarCell, BlRangeCalendar, BlDateRangePicker, BlCalendarPresets, BlCalendarCard } from './components/date-picker/index.js';
 
 export type { FormLayoutDirection } from './components/form-layout/index.js';
+export type { PageHeaderVariant } from './components/page-header/index.js';
+export type { PageHeaderAvatarSize } from './components/page-header/index.js';
 export type { ComboboxSize, ComboboxFilter } from './components/combobox/index.js';
-export type { SortDirection } from './components/data-table/index.js';
-export type { SegmentType } from './components/date-picker/index.js';
+export type { ComboboxChipItem } from './components/combobox/index.js';
+export type { SortDirection, ColumnDef, ColumnVisibilityItem, FacetedFilterOption } from './components/data-table/index.js';
+export type { SegmentType, CalendarMode, DateRange, PresetKey, PresetOption } from './components/date-picker/index.js';
 
 // Primitives
 export { BlVisuallyHidden } from './primitives/visually-hidden/index.js';
@@ -84,7 +88,7 @@ export type { RovingTabindexOptions } from './controllers/index.js';
 export type { TypeaheadOptions } from './controllers/index.js';
 export type { OverlayOptions } from './controllers/index.js';
 export type { AnimationOptions, AnimationState } from './controllers/index.js';
-export type { FilterOptions } from './controllers/index.js';
+export type { FilterOptions, FilterResult } from './controllers/index.js';
 export type { GridNavigationOptions } from './controllers/index.js';
 export type { CalendarOptions, CalendarDay } from './controllers/index.js';
 

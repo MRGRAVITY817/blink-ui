@@ -1,5 +1,5 @@
 import { LitElement, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { tokens } from '../../styles/tokens.js';
 import { commandStyles } from './command.styles.js';
 import { FilterController } from '../../controllers/filter.js';
@@ -7,6 +7,7 @@ import type { BlCommandItem } from './command-item.js';
 
 /**
  * Inline command list (non-modal).
+ * Supports scored filtering, loop navigation, keywords, and controlled mode.
  *
  * @element bl-command
  * @slot - Command input, list, groups, items.
@@ -19,8 +20,22 @@ export class BlCommand extends LitElement {
 
   private _filter = new FilterController(this, {
     selector: 'bl-command-item:not([disabled])',
+    mode: 'scored',
+    keywordsAttr: 'keywords',
   });
   private _highlightedIndex = -1;
+
+  /** Enable loop navigation (wrap around from last to first and vice versa). */
+  @property({ type: Boolean })
+  loop = true;
+
+  /** Set to false to disable built-in filtering (for async/external filtering). */
+  @property({ type: Boolean, attribute: 'should-filter' })
+  shouldFilter = true;
+
+  /** Custom filter function. Overrides the built-in scored filter. */
+  @property({ attribute: false })
+  filter?: (itemText: string, query: string) => boolean;
 
   override connectedCallback(): void {
     super.connectedCallback();
@@ -36,6 +51,12 @@ export class BlCommand extends LitElement {
     this.removeEventListener('bl-command-input-change', this._handleInputChange as EventListener);
   }
 
+  override updated(changed: Map<string, unknown>): void {
+    if (changed.has('filter') && this.filter) {
+      this._filter.setMode(this.filter);
+    }
+  }
+
   private _getVisibleItems(): BlCommandItem[] {
     return Array.from(
       this.querySelectorAll<BlCommandItem>('bl-command-item'),
@@ -44,7 +65,12 @@ export class BlCommand extends LitElement {
 
   private _handleInputChange = (e: CustomEvent<{ value: string }>): void => {
     e.stopPropagation();
-    this._filter.filter(e.detail.value);
+
+    if (this.shouldFilter) {
+      this._filter.filter(e.detail.value);
+      this._updateGroupVisibility();
+      this._updateEmptyVisibility();
+    }
 
     this.dispatchEvent(
       new CustomEvent('bl-command-input', {
@@ -76,18 +102,26 @@ export class BlCommand extends LitElement {
     if (items.length === 0) return;
 
     switch (e.key) {
-      case 'ArrowDown':
+      case 'ArrowDown': {
         e.preventDefault();
-        this._highlightIndex(
-          this._highlightedIndex + 1 >= items.length ? 0 : this._highlightedIndex + 1,
-        );
+        const next = this._highlightedIndex + 1;
+        if (next >= items.length) {
+          this._highlightIndex(this.loop ? 0 : items.length - 1);
+        } else {
+          this._highlightIndex(next);
+        }
         break;
-      case 'ArrowUp':
+      }
+      case 'ArrowUp': {
         e.preventDefault();
-        this._highlightIndex(
-          this._highlightedIndex - 1 < 0 ? items.length - 1 : this._highlightedIndex - 1,
-        );
+        const prev = this._highlightedIndex - 1;
+        if (prev < 0) {
+          this._highlightIndex(this.loop ? items.length - 1 : 0);
+        } else {
+          this._highlightIndex(prev);
+        }
         break;
+      }
       case 'Enter':
         e.preventDefault();
         if (this._highlightedIndex >= 0 && this._highlightedIndex < items.length) {
@@ -101,6 +135,14 @@ export class BlCommand extends LitElement {
           );
         }
         break;
+      case 'Home':
+        e.preventDefault();
+        this._highlightIndex(0);
+        break;
+      case 'End':
+        e.preventDefault();
+        this._highlightIndex(items.length - 1);
+        break;
     }
   };
 
@@ -112,6 +154,22 @@ export class BlCommand extends LitElement {
       items[index]!.setHighlighted(true);
       items[index]!.scrollIntoView({ block: 'nearest' });
     }
+  }
+
+  private _updateGroupVisibility(): void {
+    const groups = this.querySelectorAll('bl-command-group');
+    for (const group of groups) {
+      if (group.hasAttribute('force-mount')) continue;
+      const visibleItems = group.querySelectorAll('bl-command-item:not([hidden])');
+      (group as HTMLElement).hidden = visibleItems.length === 0;
+    }
+  }
+
+  private _updateEmptyVisibility(): void {
+    const empty = this.querySelector('bl-command-empty');
+    if (!empty) return;
+    const visibleItems = this._getVisibleItems();
+    (empty as HTMLElement).hidden = visibleItems.length > 0;
   }
 
   protected override render() {

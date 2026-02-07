@@ -5,6 +5,8 @@ import { comboboxItemStyles } from './combobox.styles.js';
 
 /**
  * A single option within a combobox.
+ * Shows a checkmark when selected in single-select mode,
+ * or a checkbox indicator in multi-select mode.
  *
  * @element bl-combobox-item
  * @slot - Item label text.
@@ -62,6 +64,15 @@ export class BlComboboxItem extends LitElement {
     this.setAttribute('aria-selected', String(selected));
   }
 
+  /** Mark this item as being in multi-select mode. */
+  setMultiselect(multi: boolean): void {
+    if (multi) {
+      this.setAttribute('data-multiselect', '');
+    } else {
+      this.removeAttribute('data-multiselect');
+    }
+  }
+
   private _handleClick = (): void => {
     if (this.disabled) return;
     this.dispatchEvent(
@@ -87,6 +98,7 @@ export class BlComboboxItem extends LitElement {
   protected override render() {
     return html`
       <div class="item" part="item">
+        <!-- Single-select checkmark -->
         <svg
           class="check"
           viewBox="0 0 24 24"
@@ -99,6 +111,19 @@ export class BlComboboxItem extends LitElement {
         >
           <polyline points="20 6 9 17 4 12"></polyline>
         </svg>
+        <!-- Multi-select checkbox indicator -->
+        <span class="multi-check" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </span>
         <slot></slot>
       </div>
     `;

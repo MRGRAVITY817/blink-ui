@@ -14,6 +14,6 @@ export type { RovingTabindexOptions } from './roving-tabindex.js';
 export type { TypeaheadOptions } from './typeahead.js';
 export type { OverlayOptions } from './overlay.js';
 export type { AnimationOptions, AnimationState } from './animation.js';
-export type { FilterOptions } from './filter.js';
+export type { FilterOptions, FilterResult } from './filter.js';
 export type { GridNavigationOptions } from './grid-navigation.js';
 export type { CalendarOptions, CalendarDay } from './calendar.js';

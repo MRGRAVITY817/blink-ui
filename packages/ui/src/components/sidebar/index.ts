@@ -1,4 +1,5 @@
 export { BlSidebar } from './sidebar.js';
+export type { SidebarVariant, SidebarCollapsible } from './sidebar.js';
 export { BlSidebarHeader } from './sidebar-header.js';
 export { BlSidebarContent } from './sidebar-content.js';
 export { BlSidebarFooter } from './sidebar-footer.js';
@@ -6,4 +7,8 @@ export { BlSidebarGroup } from './sidebar-group.js';
 export { BlSidebarGroupLabel } from './sidebar-group-label.js';
 export { BlSidebarMenu } from './sidebar-menu.js';
 export { BlSidebarMenuItem } from './sidebar-menu-item.js';
+export { BlSidebarMenuSub } from './sidebar-menu-sub.js';
+export { BlSidebarMenuAction } from './sidebar-menu-action.js';
+export { BlSidebarMenuSkeleton } from './sidebar-menu-skeleton.js';
+export { BlSidebarRail } from './sidebar-rail.js';
 export { BlSidebarTrigger } from './sidebar-trigger.js';

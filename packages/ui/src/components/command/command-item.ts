@@ -23,6 +23,14 @@ export class BlCommandItem extends LitElement {
   @property({ type: Boolean })
   disabled = false;
 
+  /** Comma-separated search keywords for this item. */
+  @property()
+  keywords = '';
+
+  /** Keep item in DOM even when filtered out. */
+  @property({ type: Boolean, reflect: true, attribute: 'force-mount' })
+  forceMount = false;
+
   override connectedCallback(): void {
     super.connectedCallback();
     this.setAttribute('role', 'option');

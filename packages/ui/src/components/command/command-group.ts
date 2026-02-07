@@ -17,6 +17,10 @@ export class BlCommandGroup extends LitElement {
   @property()
   heading = '';
 
+  /** Keep group visible even when all children are filtered out. */
+  @property({ type: Boolean, reflect: true, attribute: 'force-mount' })
+  forceMount = false;
+
   override connectedCallback(): void {
     super.connectedCallback();
     this.setAttribute('role', 'group');

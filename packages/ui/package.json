@@ -183,6 +183,8 @@
   },
   "dependencies": {
     "@floating-ui/dom": "^1.7.5",
+    "@tanstack/lit-table": "^8.21.3",
+    "@tanstack/table-core": "^8.21.3",
     "lit": "^3.2.0"
   },
   "devDependencies": {

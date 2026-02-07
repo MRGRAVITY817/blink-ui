@@ -4,12 +4,31 @@ import { tokens } from '../../styles/tokens.js';
 import { sidebarStyles } from './sidebar.styles.js';
 import { AnimationController } from '../../controllers/animation.js';
 
+export type SidebarVariant = 'sidebar' | 'floating' | 'inset';
+export type SidebarCollapsible = 'offcanvas' | 'icon' | 'none';
+
 /**
  * Root sidebar container. Manages collapsed/expanded state.
  * Switches between inline sidebar and drawer mode at a configurable breakpoint.
  *
+ * Supports three layout variants:
+ * - `sidebar` (default): Standard fixed-width sidebar with border.
+ * - `floating`: Floating sidebar with rounded corners and shadow.
+ * - `inset`: Sidebar inset into the page background.
+ *
+ * Supports three collapsible modes:
+ * - `offcanvas`: Sidebar fully hides when collapsed (width: 0).
+ * - `icon`: Sidebar collapses to icon-only width.
+ * - `none`: Sidebar cannot be collapsed.
+ *
+ * Registers a global keyboard shortcut (Cmd+B / Ctrl+B) to toggle.
+ *
+ * Exposes CSS variables:
+ * - `--bl-sidebar-width` - Width when expanded (default: 260px).
+ * - `--bl-sidebar-width-collapsed` - Width when collapsed in icon mode (default: 56px).
+ *
  * @element bl-sidebar
- * @slot - Sidebar content (header, content, footer).
+ * @slot - Sidebar content (header, content, footer, rail).
  * @fires bl-sidebar-toggle - Emitted when collapsed state changes.
  */
 @customElement('bl-sidebar')
@@ -18,6 +37,7 @@ export class BlSidebar extends LitElement {
 
   private _animation = new AnimationController(this);
   private _mediaQuery: MediaQueryList | null = null;
+  private _boundKeyHandler = this._handleGlobalKeyDown.bind(this);
 
   /** Whether the sidebar is collapsed. */
   @property({ type: Boolean, reflect: true })
@@ -31,6 +51,14 @@ export class BlSidebar extends LitElement {
   @property({ reflect: true })
   mode: 'inline' | 'drawer' = 'inline';
 
+  /** Layout variant: 'sidebar', 'floating', or 'inset'. */
+  @property({ reflect: true })
+  variant: SidebarVariant = 'sidebar';
+
+  /** Collapsible behavior: 'offcanvas', 'icon', or 'none'. */
+  @property({ reflect: true })
+  collapsible: SidebarCollapsible = 'icon';
+
   /** Breakpoint for switching to drawer mode (CSS media query width). */
   @property({ attribute: 'breakpoint' })
   breakpoint = '768px';
@@ -41,11 +69,13 @@ export class BlSidebar extends LitElement {
   override connectedCallback(): void {
     super.connectedCallback();
     this._setupMediaQuery();
+    document.addEventListener('keydown', this._boundKeyHandler);
   }
 
   override disconnectedCallback(): void {
     super.disconnectedCallback();
     this._mediaQuery?.removeEventListener('change', this._handleMediaChange);
+    document.removeEventListener('keydown', this._boundKeyHandler);
   }
 
   override updated(changed: Map<string, unknown>): void {
@@ -63,6 +93,8 @@ export class BlSidebar extends LitElement {
 
   /** Toggle collapsed state. */
   toggle(): void {
+    if (this.collapsible === 'none') return;
+
     if (this.mode === 'drawer') {
       this.open = !this.open;
     } else {
@@ -70,11 +102,19 @@ export class BlSidebar extends LitElement {
     }
     this.dispatchEvent(
       new CustomEvent('bl-sidebar-toggle', {
-        detail: { collapsed: this.collapsed, open: this.open, mode: this.mode },
+        detail: { collapsed: this.collapsed, open: this.open, mode: this.mode, variant: this.variant },
         composed: true,
         bubbles: true,
       }),
     );
+  }
+
+  private _handleGlobalKeyDown(e: KeyboardEvent): void {
+    // Cmd+B (Mac) or Ctrl+B (Windows/Linux)
+    if ((e.metaKey || e.ctrlKey) && e.key === 'b') {
+      e.preventDefault();
+      this.toggle();
+    }
   }
 
   private _setupMediaQuery(): void {
@@ -111,7 +151,7 @@ export class BlSidebar extends LitElement {
     this.open = false;
     this.dispatchEvent(
       new CustomEvent('bl-sidebar-toggle', {
-        detail: { collapsed: this.collapsed, open: false, mode: this.mode },
+        detail: { collapsed: this.collapsed, open: false, mode: this.mode, variant: this.variant },
         composed: true,
         bubbles: true,
       }),
