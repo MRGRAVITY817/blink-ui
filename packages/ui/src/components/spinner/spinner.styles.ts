@@ -31,7 +31,7 @@ export const spinnerStyles = css`
   :host([size='lg']) .spinner {
     width: 2rem;
     height: 2rem;
-    border-width: 3px;
+    border-width: 2.5px;
   }
 
   .sr-only {

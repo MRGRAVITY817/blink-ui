@@ -11,7 +11,6 @@ export const checkboxStyles = css`
   }
 
   :host([aria-disabled='true']) {
-    opacity: 0.5;
     cursor: not-allowed;
     pointer-events: none;
   }
@@ -21,22 +20,23 @@ export const checkboxStyles = css`
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    border: 2px solid var(--bl-color-neutral-400);
-    border-radius: var(--bl-radius-sm);
-    background-color: transparent;
+    background-color: #fff;
+    box-shadow: inset 0 0 0 1px var(--bl-color-neutral-300);
     transition:
       background-color var(--bl-transition-fast),
-      border-color var(--bl-transition-fast);
+      box-shadow var(--bl-transition-fast);
   }
 
   :host([size='sm']) .checkbox {
     width: 1rem;
     height: 1rem;
+    border-radius: var(--bl-radius-sm);
   }
 
   :host([size='md']) .checkbox {
     width: 1.25rem;
     height: 1.25rem;
+    border-radius: var(--bl-radius-md-lg);
   }
 
   :host([size='sm']) {
@@ -50,13 +50,13 @@ export const checkboxStyles = css`
   /* Checked */
   :host([data-checked]) .checkbox {
     background-color: var(--bl-color-primary-600);
-    border-color: var(--bl-color-primary-600);
+    box-shadow: none;
   }
 
   /* Indeterminate */
   :host([data-checked='mixed']) .checkbox {
     background-color: var(--bl-color-primary-600);
-    border-color: var(--bl-color-primary-600);
+    box-shadow: none;
   }
 
   .check-icon {
@@ -68,20 +68,44 @@ export const checkboxStyles = css`
     display: block;
   }
 
-  .check-icon svg {
-    width: 100%;
-    height: 100%;
+  :host([size='sm']) .check-icon svg {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  :host([size='md']) .check-icon svg {
+    width: 0.875rem;
+    height: 0.875rem;
   }
 
   /* Focus */
   :host(:focus-visible) .checkbox {
-    outline: var(--bl-focus-ring);
-    outline-offset: var(--bl-focus-ring-offset);
+    outline: 2px solid var(--bl-focus-ring-color);
+    outline-offset: 2px;
   }
 
   /* Hover */
-  :host(:hover:not([aria-disabled='true'])) .checkbox {
-    border-color: var(--bl-color-primary-500);
+  :host(:hover:not([aria-disabled='true']):not([data-checked])) .checkbox {
+    box-shadow: inset 0 0 0 1px var(--bl-color-primary-300);
+  }
+
+  :host(:hover:not([aria-disabled='true'])[data-checked]) .checkbox {
+    background-color: var(--bl-color-primary-700);
+  }
+
+  /* Disabled */
+  :host([aria-disabled='true']) .checkbox {
+    background-color: var(--bl-color-neutral-100);
+    box-shadow: inset 0 0 0 1px var(--bl-color-neutral-300);
+  }
+
+  :host([aria-disabled='true'][data-checked]) .checkbox {
+    background-color: var(--bl-color-neutral-100);
+    box-shadow: inset 0 0 0 1px var(--bl-color-neutral-300);
+  }
+
+  :host([aria-disabled='true'][data-checked]) .check-icon {
+    fill: var(--bl-color-neutral-400);
   }
 
   .label {

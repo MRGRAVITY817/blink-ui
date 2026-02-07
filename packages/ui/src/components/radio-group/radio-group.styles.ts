@@ -4,7 +4,7 @@ export const radioGroupStyles = css`
   :host {
     display: flex;
     flex-direction: column;
-    gap: var(--bl-spacing-sm);
+    gap: var(--bl-spacing-md);
   }
 
   :host([orientation='horizontal']) {

@@ -14,7 +14,7 @@
     },
     {
       "path": "radio-group/radio-group.styles.ts",
-      "content": "import { css } from 'lit';\n\nexport const radioGroupStyles = css`\n  :host {\n    display: flex;\n    flex-direction: column;\n    gap: var(--bl-spacing-sm);\n  }\n\n  :host([orientation='horizontal']) {\n    flex-direction: row;\n    align-items: center;\n  }\n\n  :host([aria-disabled='true']) {\n    opacity: 0.5;\n    pointer-events: none;\n  }\n`;\n"
+      "content": "import { css } from 'lit';\n\nexport const radioGroupStyles = css`\n  :host {\n    display: flex;\n    flex-direction: column;\n    gap: var(--bl-spacing-md);\n  }\n\n  :host([orientation='horizontal']) {\n    flex-direction: row;\n    align-items: center;\n  }\n\n  :host([aria-disabled='true']) {\n    opacity: 0.5;\n    pointer-events: none;\n  }\n`;\n"
     },
     {
       "path": "radio-group/index.ts",

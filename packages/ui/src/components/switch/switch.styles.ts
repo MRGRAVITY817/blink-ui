@@ -11,7 +11,6 @@ export const switchStyles = css`
   }
 
   :host([aria-disabled='true']) {
-    opacity: 0.5;
     cursor: not-allowed;
     pointer-events: none;
   }
@@ -20,13 +19,13 @@ export const switchStyles = css`
     position: relative;
     flex-shrink: 0;
     border-radius: var(--bl-radius-full);
-    background-color: var(--bl-color-neutral-300);
+    background-color: var(--bl-color-neutral-200);
     transition: background-color var(--bl-transition-fast);
   }
 
   :host([size='sm']) .track {
-    width: 2rem;
-    height: 1.125rem;
+    width: 2.25rem;
+    height: 1.25rem;
   }
 
   :host([size='md']) .track {
@@ -47,19 +46,19 @@ export const switchStyles = css`
     top: 2px;
     left: 2px;
     border-radius: var(--bl-radius-full);
-    background-color: white;
+    background-color: #fff;
     transition: transform var(--bl-transition-fast);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--bl-shadow-xs);
   }
 
   :host([size='sm']) .thumb {
-    width: calc(1.125rem - 4px);
-    height: calc(1.125rem - 4px);
+    width: 1rem;
+    height: 1rem;
   }
 
   :host([size='md']) .thumb {
-    width: calc(1.5rem - 4px);
-    height: calc(1.5rem - 4px);
+    width: 1.25rem;
+    height: 1.25rem;
   }
 
   /* Checked */
@@ -68,26 +67,36 @@ export const switchStyles = css`
   }
 
   :host([data-checked][size='sm']) .thumb {
-    transform: translateX(calc(2rem - 1.125rem));
+    transform: translateX(1rem);
   }
 
   :host([data-checked][size='md']) .thumb {
-    transform: translateX(calc(2.75rem - 1.5rem));
+    transform: translateX(1.25rem);
   }
 
   /* Focus */
   :host(:focus-visible) .track {
-    outline: var(--bl-focus-ring);
-    outline-offset: var(--bl-focus-ring-offset);
+    outline: 2px solid var(--bl-focus-ring-color);
+    outline-offset: 2px;
   }
 
   /* Hover */
-  :host(:hover:not([aria-disabled='true'])) .track {
-    background-color: var(--bl-color-neutral-400);
+  :host(:hover:not([aria-disabled='true']):not([data-checked])) .track {
+    background-color: var(--bl-color-neutral-300);
   }
 
   :host([data-checked]:hover:not([aria-disabled='true'])) .track {
     background-color: var(--bl-color-primary-700);
+  }
+
+  /* Disabled */
+  :host([aria-disabled='true']) .track {
+    background-color: var(--bl-color-neutral-100);
+  }
+
+  :host([aria-disabled='true']) .thumb {
+    background-color: var(--bl-color-neutral-50);
+    box-shadow: none;
   }
 
   .label {

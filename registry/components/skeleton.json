@@ -12,7 +12,7 @@
     },
     {
       "path": "skeleton/skeleton.styles.ts",
-      "content": "import { css } from 'lit';\n\nexport const skeletonStyles = css`\n  :host {\n    display: block;\n  }\n\n  .skeleton {\n    background-color: var(--bl-color-neutral-200);\n    border-radius: var(--bl-radius-md);\n    animation: bl-pulse 1.5s ease-in-out infinite;\n  }\n\n  :host([variant='circle']) .skeleton {\n    border-radius: var(--bl-radius-full);\n  }\n\n  :host([variant='text']) .skeleton {\n    border-radius: var(--bl-radius-sm);\n  }\n\n  @keyframes bl-pulse {\n    0%,\n    100% {\n      opacity: 1;\n    }\n    50% {\n      opacity: 0.4;\n    }\n  }\n`;\n"
+      "content": "import { css } from 'lit';\n\nexport const skeletonStyles = css`\n  :host {\n    display: block;\n  }\n\n  .skeleton {\n    background-color: var(--bl-color-neutral-100);\n    border-radius: var(--bl-radius-md);\n    animation: bl-pulse 1.5s ease-in-out infinite;\n  }\n\n  :host([variant='circle']) .skeleton {\n    border-radius: var(--bl-radius-full);\n  }\n\n  :host([variant='text']) .skeleton {\n    border-radius: var(--bl-radius-sm);\n  }\n\n  @keyframes bl-pulse {\n    0%,\n    100% {\n      opacity: 1;\n    }\n    50% {\n      opacity: 0.4;\n    }\n  }\n`;\n"
     },
     {
       "path": "skeleton/index.ts",

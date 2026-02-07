@@ -14,11 +14,12 @@ export const avatarStyles = css`
     justify-content: center;
     border-radius: var(--bl-radius-full);
     overflow: hidden;
-    background-color: var(--bl-color-neutral-200);
+    background-color: var(--bl-color-neutral-100);
     color: var(--bl-color-neutral-600);
     font-family: var(--bl-font-family-base);
     font-weight: 600;
     user-select: none;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
   }
 
   :host([size='sm']) .avatar {
@@ -49,6 +50,7 @@ export const avatarStyles = css`
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--bl-color-neutral-400);
   }
 
   .fallback-icon svg {

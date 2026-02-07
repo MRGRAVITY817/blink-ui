@@ -116,17 +116,26 @@ export const tokens = css`
     /* -------------------------------------------------------
        Border Radius
        ------------------------------------------------------- */
+    --bl-radius-xs: 0.125rem;
     --bl-radius-sm: 0.25rem;
     --bl-radius-md: 0.5rem;
+    --bl-radius-md-lg: 0.375rem;
     --bl-radius-lg: 1rem;
     --bl-radius-full: 9999px;
+
+    /* -------------------------------------------------------
+       Shadows
+       ------------------------------------------------------- */
+    --bl-shadow-xs: 0px 1px 2px rgba(10, 13, 18, 0.05);
+    --bl-shadow-sm: 0px 1px 3px rgba(10, 13, 18, 0.1),
+      0px 1px 2px -1px rgba(10, 13, 18, 0.1);
 
     /* -------------------------------------------------------
        Focus Ring
        ------------------------------------------------------- */
     --bl-focus-ring-width: 2px;
     --bl-focus-ring-offset: 2px;
-    --bl-focus-ring-color: var(--bl-color-primary-400);
+    --bl-focus-ring-color: var(--bl-color-primary-500);
     --bl-focus-ring: var(--bl-focus-ring-width) solid var(--bl-focus-ring-color);
 
     /* -------------------------------------------------------

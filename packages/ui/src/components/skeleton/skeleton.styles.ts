@@ -6,7 +6,7 @@ export const skeletonStyles = css`
   }
 
   .skeleton {
-    background-color: var(--bl-color-neutral-200);
+    background-color: var(--bl-color-neutral-100);
     border-radius: var(--bl-radius-md);
     animation: bl-pulse 1.5s ease-in-out infinite;
   }

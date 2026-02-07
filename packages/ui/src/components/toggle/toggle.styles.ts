@@ -20,13 +20,15 @@ export const toggleStyles = css`
     line-height: 1;
     cursor: pointer;
     user-select: none;
-    background-color: transparent;
+    background-color: #fff;
     color: var(--bl-color-neutral-600);
     border: 1px solid var(--bl-color-neutral-300);
+    box-shadow: var(--bl-shadow-xs);
     transition:
       background-color var(--bl-transition-fast),
       color var(--bl-transition-fast),
-      border-color var(--bl-transition-fast);
+      border-color var(--bl-transition-fast),
+      box-shadow var(--bl-transition-fast);
   }
 
   /* Sizes */
@@ -68,7 +70,7 @@ export const toggleStyles = css`
 
   /* Hover */
   button:hover {
-    background-color: var(--bl-color-neutral-100);
+    background-color: var(--bl-color-neutral-50);
   }
 
   :host([data-pressed]) button:hover {
@@ -77,8 +79,8 @@ export const toggleStyles = css`
 
   /* Focus */
   button:focus-visible {
-    outline: var(--bl-focus-ring);
-    outline-offset: var(--bl-focus-ring-offset);
+    outline: 2px solid var(--bl-focus-ring-color);
+    outline-offset: 2px;
   }
 
   /* Disabled */
