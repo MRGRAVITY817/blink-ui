@@ -96,6 +96,14 @@ const REGISTRY_DEPS: Record<string, string[]> = {
   accordion: [],
   dialog: [],
   toast: ['live-announce'],
+  // v0.5 Components
+  'form-layout': ['label', 'input'],
+  'page-header': [],
+  sidebar: ['dialog'],
+  combobox: [],
+  command: ['dialog'],
+  'data-table': ['checkbox'],
+  'date-picker': [],
 };
 
 const NPM_DEPS: Record<string, Record<string, string>> = {
@@ -104,6 +112,9 @@ const NPM_DEPS: Record<string, Record<string, string>> = {
   select: { lit: '^3.2.0', '@floating-ui/dom': '^1.7.0' },
   menu: { lit: '^3.2.0', '@floating-ui/dom': '^1.7.0' },
   'context-menu': { lit: '^3.2.0', '@floating-ui/dom': '^1.7.0' },
+  // v0.5 Components
+  combobox: { lit: '^3.2.0', '@floating-ui/dom': '^1.7.0' },
+  'date-picker': { lit: '^3.2.0', '@floating-ui/dom': '^1.7.0' },
 };
 
 function buildRegistry() {
@@ -144,6 +155,14 @@ function buildRegistry() {
     'context-menu': 'A context menu triggered by right-click.',
     dialog: 'A modal dialog with focus trap and backdrop.',
     toast: 'Toast notifications with imperative API and auto-dismiss.',
+    // v0.5 Components
+    'form-layout': 'Form layout components for structuring form fields, labels, and validation.',
+    'page-header': 'Page header with breadcrumb, title, description, and action slots.',
+    sidebar: 'Responsive sidebar navigation with collapse/expand and drawer modes.',
+    combobox: 'An autocomplete combobox with input, filtering, and dropdown listbox.',
+    command: 'Command palette with search, keyboard navigation, and modal/inline modes.',
+    'data-table': 'Data table with sorting, selection, pagination, and grid navigation.',
+    'date-picker': 'Date picker with segmented input and calendar popup.',
     // Primitives
     'visually-hidden': 'Visually hidden but accessible to screen readers.',
     portal: 'Renders children outside the parent DOM hierarchy.',

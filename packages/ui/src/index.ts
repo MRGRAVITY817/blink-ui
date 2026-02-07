@@ -48,6 +48,20 @@ export type { SelectSize } from './components/select/index.js';
 export type { MenuItemVariant } from './components/menu/index.js';
 export type { ToastVariant, ToastPosition, ToastOptions } from './components/toast/index.js';
 
+// v0.5 Components
+export { BlFormLayout, BlFormField, BlFormDescription, BlFormError, BlFormFieldset } from './components/form-layout/index.js';
+export { BlPageHeader, BlBreadcrumb, BlBreadcrumbItem } from './components/page-header/index.js';
+export { BlSidebar, BlSidebarHeader, BlSidebarContent, BlSidebarFooter, BlSidebarGroup, BlSidebarGroupLabel, BlSidebarMenu, BlSidebarMenuItem, BlSidebarTrigger } from './components/sidebar/index.js';
+export { BlCombobox, BlComboboxItem, BlComboboxGroup, BlComboboxEmpty } from './components/combobox/index.js';
+export { BlCommand, BlCommandDialog, BlCommandInput, BlCommandList, BlCommandGroup, BlCommandItem, BlCommandEmpty, BlCommandSeparator, BlCommandShortcut } from './components/command/index.js';
+export { BlDataTable, BlTableHeader, BlTableBody, BlTableRow, BlTableHeaderCell, BlTableCell, BlTablePagination } from './components/data-table/index.js';
+export { BlDatePicker, BlDateField, BlDateSegment, BlCalendar, BlCalendarCell } from './components/date-picker/index.js';
+
+export type { FormLayoutDirection } from './components/form-layout/index.js';
+export type { ComboboxSize, ComboboxFilter } from './components/combobox/index.js';
+export type { SortDirection } from './components/data-table/index.js';
+export type { SegmentType } from './components/date-picker/index.js';
+
 // Primitives
 export { BlVisuallyHidden } from './primitives/visually-hidden/index.js';
 export { BlPortal } from './primitives/portal/index.js';
@@ -60,6 +74,9 @@ export { RovingTabindexController } from './controllers/index.js';
 export { TypeaheadController } from './controllers/index.js';
 export { OverlayController } from './controllers/index.js';
 export { AnimationController } from './controllers/index.js';
+export { FilterController } from './controllers/index.js';
+export { GridNavigationController } from './controllers/index.js';
+export { CalendarController } from './controllers/index.js';
 
 export type { FocusTrapOptions } from './controllers/index.js';
 export type { ClickOutsideOptions } from './controllers/index.js';
@@ -67,6 +84,9 @@ export type { RovingTabindexOptions } from './controllers/index.js';
 export type { TypeaheadOptions } from './controllers/index.js';
 export type { OverlayOptions } from './controllers/index.js';
 export type { AnimationOptions, AnimationState } from './controllers/index.js';
+export type { FilterOptions } from './controllers/index.js';
+export type { GridNavigationOptions } from './controllers/index.js';
+export type { CalendarOptions, CalendarDay } from './controllers/index.js';
 
 // Design tokens
 export { tokens } from './styles/tokens.js';

@@ -67,6 +67,27 @@
       }
     },
     {
+      "name": "combobox",
+      "description": "An autocomplete combobox with input + dropdown listbox.",
+      "tag": "bl-combobox",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0",
+        "@floating-ui/dom": "^1.7.0"
+      }
+    },
+    {
+      "name": "command",
+      "description": "Inline command list (non-modal).",
+      "tag": "bl-command",
+      "registryDependencies": [
+        "dialog"
+      ],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
       "name": "context-menu",
       "description": "A context menu that opens on right-click of its slotted target.",
       "tag": "bl-context-menu",
@@ -79,10 +100,43 @@
       }
     },
     {
+      "name": "data-table",
+      "description": "Data table root container with `role=\"grid\"`.",
+      "tag": "bl-data-table",
+      "registryDependencies": [
+        "checkbox"
+      ],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "date-picker",
+      "description": "Date picker with segmented input + calendar popup.",
+      "tag": "bl-date-picker",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0",
+        "@floating-ui/dom": "^1.7.0"
+      }
+    },
+    {
       "name": "dialog",
       "description": "A modal dialog with backdrop, focus trap, and close controls.",
       "tag": "bl-dialog",
       "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "form-layout",
+      "description": "Container that sets the layout direction for form fields.",
+      "tag": "bl-form-layout",
+      "registryDependencies": [
+        "label",
+        "input"
+      ],
       "npmDependencies": {
         "lit": "^3.2.0"
       }
@@ -122,6 +176,15 @@
       "npmDependencies": {
         "lit": "^3.2.0",
         "@floating-ui/dom": "^1.7.0"
+      }
+    },
+    {
+      "name": "page-header",
+      "description": "Page header with title, description, and actions layout via named slots.",
+      "tag": "bl-page-header",
+      "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0"
       }
     },
     {
@@ -171,6 +234,17 @@
       "description": "A content divider for the Blink UI design system.",
       "tag": "bl-separator",
       "registryDependencies": [],
+      "npmDependencies": {
+        "lit": "^3.2.0"
+      }
+    },
+    {
+      "name": "sidebar",
+      "description": "Root sidebar container. Manages collapsed/expanded state.",
+      "tag": "bl-sidebar",
+      "registryDependencies": [
+        "dialog"
+      ],
       "npmDependencies": {
         "lit": "^3.2.0"
       }
